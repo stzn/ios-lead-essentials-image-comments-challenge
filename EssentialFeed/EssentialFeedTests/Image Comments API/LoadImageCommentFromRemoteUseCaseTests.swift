@@ -82,15 +82,15 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
     func test_load_deliversItemsOn2xxHTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
 
-        let item1 = makeItem(
-            id: UUID(),
-            imageURL: URL(string: "http://a-url.com")!)
+        let item1 = makeItem(id: UUID(),
+                             message: "a message",
+                             createdAt: (Date(timeIntervalSince1970: 0), "1970-01-01T00:00:00+0000"),
+                             username: "a username")
 
-        let item2 = makeItem(
-            id: UUID(),
-            description: "a description",
-            location: "a location",
-            imageURL: URL(string: "http://another-url.com")!)
+        let item2 = makeItem(id: UUID(),
+                             message: "another message",
+                             createdAt: (Date(timeIntervalSince1970: 1), "1970-01-01T00:00:01+0000"),
+                             username: "another username")
 
         let items = [item1.model, item2.model]
 
@@ -132,14 +132,20 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
         return .failure(error)
     }
 
-    private func makeItem(id: UUID, description: String? = nil, location: String? = nil, imageURL: URL) -> (model: FeedImage, json: [String: Any]) {
-        let item = FeedImage(id: id, description: description, location: location, url: imageURL)
+    private func makeItem(id: UUID, message: String, createdAt: (date: Date, iso8601String: String), username: String) -> (model: ImageComment, json: [String: Any]) {
+        let item = ImageComment(id: id,
+                                message: message,
+                                createdAt: createdAt.date,
+                                username: username)
 
         let json = [
             "id": id.uuidString,
-            "description": description,
-            "location": location,
-            "image": imageURL.absoluteString
+            "message": message,
+            "created_at": createdAt.iso8601String
+            ,
+            "author": [
+                "username": username
+            ]
         ].compactMapValues { $0 }
 
         return (item, json)
@@ -158,7 +164,7 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
             case let (.success(receivedItems), .success(expectedItems)):
                 XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
 
-            case let (.failure(receivedError as RemoteImageCommentsLoader.Error), .failure(expectedError as RemoteImageCommentsLoader.Error)):
+            case let (.failure(receivedError), .failure(expectedError)):
                 XCTAssertEqual(receivedError, expectedError, file: file, line: line)
 
             default:
