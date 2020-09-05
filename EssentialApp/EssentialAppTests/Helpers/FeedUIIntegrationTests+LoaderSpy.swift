@@ -9,25 +9,27 @@ import EssentialFeediOS
 
 extension FeedUIIntegrationTests {
 	
-    class LoaderSpy: FeedImageDataLoader {
+    class LoaderSpy {
 
-        typealias Result = Swift.Result<[FeedImage], Error>
-        typealias Publisher = AnyPublisher<[FeedImage], Error>
+        // MARK: - FeedLoader
 
-        func loadPublisher() -> Publisher {
+        typealias FeedLoaderResult = Swift.Result<[FeedImage], Error>
+        typealias FeedLoaderPublisher = AnyPublisher<[FeedImage], Error>
+
+        func loadPublisher() -> FeedLoaderPublisher {
             Deferred {
                 Future(self.load)
             }
             .eraseToAnyPublisher()
         }
 
-        private var feedRequests: [(Result) -> Void] = []
+        private var feedRequests: [(FeedLoaderResult) -> Void] = []
 		
 		var loadFeedCallCount: Int {
 			return feedRequests.count
 		}
 		
-		func load(completion: @escaping (Result) -> Void) {
+		func load(completion: @escaping (FeedLoaderResult) -> Void) {
 			feedRequests.append(completion)
 		}
 		
@@ -41,7 +43,22 @@ extension FeedUIIntegrationTests {
 		}
 		
 		// MARK: - FeedImageDataLoader
-		
+
+        typealias FeedImageDataLoaderResult = Swift.Result<Data, Error>
+        typealias FeedImageDataLoaderPublisher = AnyPublisher<Data, Error>
+
+        func loadImageDataPublisher(from url: URL) -> FeedImageDataLoaderPublisher {
+            var task: FeedImageDataLoaderTask?
+
+            return Deferred {
+                Future { completion in
+                    task = self.loadImageData(from: url, completion: completion)
+                }
+            }
+            .handleEvents(receiveCancel: { task?.cancel() })
+            .eraseToAnyPublisher()
+        }
+
 		private struct TaskSpy: FeedImageDataLoaderTask {
 			let cancelCallback: () -> Void
 			func cancel() {
@@ -49,7 +66,7 @@ extension FeedUIIntegrationTests {
 			}
 		}
 		
-		private var imageRequests = [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)]()
+        private var imageRequests = [(url: URL, completion: (FeedImageDataLoaderResult) -> Void)]()
 		
 		var loadedImageURLs: [URL] {
 			return imageRequests.map { $0.url }
@@ -57,7 +74,7 @@ extension FeedUIIntegrationTests {
 		
 		private(set) var cancelledImageURLs = [URL]()
 		
-		func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
+		func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoaderResult) -> Void) -> FeedImageDataLoaderTask {
 			imageRequests.append((url, completion))
 			return TaskSpy { [weak self] in self?.cancelledImageURLs.append(url) }
 		}
