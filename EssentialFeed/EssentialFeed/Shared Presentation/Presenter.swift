@@ -4,28 +4,8 @@
 
 import Foundation
 
-public struct ViewModel {
-    public let feed: [FeedImage]
-}
-
-public struct LoadingViewModel {
-    public let isLoading: Bool
-}
-
-public struct ErrorViewModel {
-    public let message: String?
-
-    static var noError: ErrorViewModel {
-        return ErrorViewModel(message: nil)
-    }
-
-    static func error(message: String) -> ErrorViewModel {
-        return ErrorViewModel(message: message)
-    }
-}
-
-
 public protocol View {
+    associatedtype ViewModel
     func display(_ viewModel: ViewModel)
 }
 
@@ -37,8 +17,10 @@ public protocol ErrorView {
     func display(_ viewModel: ErrorViewModel)
 }
 
-public final class Presenter {
-    private let view: View
+public final class Presenter<V: View> {
+    public let title: String
+
+    private let view: V
     private let loadingView: LoadingView
     private let errorView: ErrorView
 
@@ -49,7 +31,8 @@ public final class Presenter {
                 comment: "Error message displayed when we can't load the image feed from the server")
     }
 
-    public init(view: View, loadingView: LoadingView, errorView: ErrorView) {
+    public init(title: String, view: V, loadingView: LoadingView, errorView: ErrorView) {
+        self.title = title
         self.view = view
         self.loadingView = loadingView
         self.errorView = errorView
@@ -60,8 +43,8 @@ public final class Presenter {
         loadingView.display(LoadingViewModel(isLoading: true))
     }
 
-    public func didFinishLoading(with feed: [FeedImage]) {
-        view.display(ViewModel(feed: feed))
+    public func didFinishLoading(with viewModel: V.ViewModel) {
+        view.display(viewModel)
         loadingView.display(LoadingViewModel(isLoading: false))
     }
 

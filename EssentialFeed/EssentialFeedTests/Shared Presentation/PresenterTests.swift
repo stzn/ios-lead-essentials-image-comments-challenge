@@ -6,6 +6,11 @@ import XCTest
 import EssentialFeed
 
 class PresenterTests: XCTestCase {
+    func test_title_set() {
+        let title = "any title"
+        let (sut, _) = makeSUT(title: title)
+        XCTAssertEqual(sut.title, title)
+    }
 
     func test_init_doesNotSendMessagesToView() {
         let (_, view) = makeSUT()
@@ -26,12 +31,12 @@ class PresenterTests: XCTestCase {
 
     func test_didFinishLoadingFeed_displaysFeedAndStopsLoading() {
         let (sut, view) = makeSUT()
-        let feed = uniqueImageFeed().models
+        let content = "content"
 
-        sut.didFinishLoading(with: feed)
+        sut.didFinishLoading(with: content)
 
         XCTAssertEqual(view.messages, [
-            .display(feed: feed),
+            .display(view: content),
             .display(isLoading: false)
         ])
     }
@@ -49,9 +54,10 @@ class PresenterTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: Presenter, view: ViewSpy) {
+    private func makeSUT(title: String = "any",
+                         file: StaticString = #file, line: UInt = #line) -> (sut: Presenter<ViewSpy>, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = Presenter(view: view, loadingView: view, errorView: view)
+        let sut = Presenter<ViewSpy>(title: title, view: view, loadingView: view, errorView: view)
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, view)
@@ -59,7 +65,7 @@ class PresenterTests: XCTestCase {
 
     private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
         let table = "Presenter"
-        let bundle = Bundle(for: Presenter.self)
+        let bundle = Bundle(for: Presenter<ViewSpy>.self)
         let value = bundle.localizedString(forKey: key, value: nil, table: table)
         if value == key {
             XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
@@ -68,10 +74,12 @@ class PresenterTests: XCTestCase {
     }
 
     private class ViewSpy: View, LoadingView, ErrorView {
+        typealias ViewModel = String
+
         enum Message: Hashable {
             case display(errorMessage: String?)
             case display(isLoading: Bool)
-            case display(feed: [FeedImage])
+            case display(view: String)
         }
 
         private(set) var messages = Set<Message>()
@@ -85,7 +93,7 @@ class PresenterTests: XCTestCase {
         }
 
         func display(_ viewModel: ViewModel) {
-            messages.insert(.display(feed: viewModel.feed))
+            messages.insert(.display(view: viewModel))
         }
     }
 
