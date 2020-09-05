@@ -5,12 +5,15 @@
 import Foundation
 
 public final class FeedPresenter {
-	public static var title: String {
-		return NSLocalizedString("FEED_VIEW_TITLE",
-			tableName: "Feed",
-			bundle: Bundle(for: FeedPresenter.self),
-			comment: "Title for the feed view")
-	}
+    public static let stringsFileName = "Feed"
+    public static let titleKey = "VIEW_TITLE"
+    public static var title: String {
+        return NSLocalizedString(
+            titleKey,
+            tableName: stringsFileName,
+            bundle: Bundle(for: FeedPresenter.self),
+            comment: "Title for the feed view")
+    }
 }
 
 extension Presenter where V.ViewModel == FeedViewModel {
