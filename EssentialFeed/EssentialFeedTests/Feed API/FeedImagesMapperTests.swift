@@ -7,7 +7,7 @@ import EssentialFeed
 
 class FeedImagesMapperTests: XCTestCase {
 	
-	func test_load_deliversErrorOnNon200HTTPResponse() throws {
+	func test_map_deliversErrorOnNon200HTTPResponse() throws {
 		let samples = [199, 201, 300, 400, 500]
 
 		try samples.forEach { code in
@@ -15,18 +15,18 @@ class FeedImagesMapperTests: XCTestCase {
 		}
 	}
 	
-	func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
+	func test_map_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let invalidJSON = Data("invalid json".utf8)
         XCTAssertThrowsError(try FeedImagesMapper.map(invalidJSON, from: HTTPURLResponse(statusCode: 200)))
 	}
 	
-	func test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() throws {
+	func test_map_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() throws {
         let emptyListJSON = makeItemsJSON([])
         let result = try FeedImagesMapper.map(emptyListJSON, from: HTTPURLResponse(statusCode: 200))
         XCTAssertEqual(result, [])
 	}
 	
-	func test_load_deliversItemsOn200HTTPResponseWithJSONItems() throws {
+	func test_map_deliversItemsOn200HTTPResponseWithJSONItems() throws {
 		let item1 = makeItem(
 			id: UUID(),
 			imageURL: URL(string: "http://a-url.com")!)
