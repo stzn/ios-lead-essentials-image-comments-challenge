@@ -53,11 +53,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func makeRemoteFeedLoaderWithLocalFallback() -> FeedLoader.Publisher {
         let remoteURL = URL(string: "http://image-comments-challenge.essentialdeveloper.com/feed")!
-        
-        let remoteFeedLoader = RemoteLoader(url: remoteURL, client: httpClient, mapper: FeedImagesMapper.map)
-        
-        return remoteFeedLoader
-            .loadPublisher()
+
+        return httpClient
+            .getPublisher(from: remoteURL)
+            .tryMap(FeedImagesMapper.map)
             .caching(to: localFeedLoader)
             .fallback(to: localFeedLoader.loadPublisher)
     }
@@ -75,5 +74,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             })
     }
 }
-
-extension RemoteLoader: FeedLoader where Resource == [FeedImage] {}
