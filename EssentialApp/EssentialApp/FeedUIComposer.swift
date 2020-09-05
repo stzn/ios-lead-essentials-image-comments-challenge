@@ -15,13 +15,13 @@ public final class FeedUIComposer {
         imageLoader: @escaping (URL) -> AnyPublisher<Data, Swift.Error>
     ) -> FeedViewController {
 		let presentationAdapter = FeedLoaderPresentationAdapter(feedLoader: feedLoader)
-		
+
 		let feedController = makeFeedViewController(
 			delegate: presentationAdapter,
-			title: FeedPresenter.title)
+            title: FeedPresenter.title)
 
-		presentationAdapter.presenter = FeedPresenter(
-			feedView: FeedViewAdapter(
+		presentationAdapter.presenter = Presenter(
+			view: FeedViewAdapter(
 				controller: feedController,
                 imageLoader: imageLoader),
 			loadingView: WeakRefVirtualProxy(feedController),

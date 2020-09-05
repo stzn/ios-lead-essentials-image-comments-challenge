@@ -6,11 +6,6 @@ import XCTest
 import EssentialFeed
 
 class PresenterTests: XCTestCase {
-    func test_title_set() {
-        let title = "any title"
-        let (sut, _) = makeSUT(title: title)
-        XCTAssertEqual(sut.title, title)
-    }
 
     func test_init_doesNotSendMessagesToView() {
         let (_, view) = makeSUT()
@@ -54,10 +49,9 @@ class PresenterTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func makeSUT(title: String = "any",
-                         file: StaticString = #file, line: UInt = #line) -> (sut: Presenter<ViewSpy>, view: ViewSpy) {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: Presenter<ViewSpy>, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = Presenter<ViewSpy>(title: title, view: view, loadingView: view, errorView: view)
+        let sut = Presenter<ViewSpy>(view: view, loadingView: view, errorView: view)
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, view)
@@ -73,7 +67,7 @@ class PresenterTests: XCTestCase {
         return value
     }
 
-    private class ViewSpy: View, LoadingView, ErrorView {
+    private class ViewSpy: ViewPresenter, LoadingViewPresenter, ErrorViewPresenter {
         typealias ViewModel = String
 
         enum Message: Hashable {

@@ -4,25 +4,23 @@
 
 import Foundation
 
-public protocol View {
+public protocol ViewPresenter {
     associatedtype ViewModel
     func display(_ viewModel: ViewModel)
 }
 
-public protocol LoadingView {
+public protocol LoadingViewPresenter {
     func display(_ viewModel: LoadingViewModel)
 }
 
-public protocol ErrorView {
+public protocol ErrorViewPresenter {
     func display(_ viewModel: ErrorViewModel)
 }
 
-public final class Presenter<V: View> {
-    public let title: String
-
+public final class Presenter<V: ViewPresenter> {
     private let view: V
-    private let loadingView: LoadingView
-    private let errorView: ErrorView
+    private let loadingView: LoadingViewPresenter
+    private let errorView: ErrorViewPresenter
 
     private var loadError: String {
         return NSLocalizedString("VIEW_CONNECTION_ERROR",
@@ -31,8 +29,7 @@ public final class Presenter<V: View> {
                 comment: "Error message displayed when we can't load the image feed from the server")
     }
 
-    public init(title: String, view: V, loadingView: LoadingView, errorView: ErrorView) {
-        self.title = title
+    public init(view: V, loadingView: LoadingViewPresenter, errorView: ErrorViewPresenter) {
         self.view = view
         self.loadingView = loadingView
         self.errorView = errorView
@@ -51,5 +48,11 @@ public final class Presenter<V: View> {
     public func didFinishLoading(with error: Error) {
         errorView.display(.error(message: loadError))
         loadingView.display(LoadingViewModel(isLoading: false))
+    }
+}
+
+extension Presenter where V.ViewModel == FeedViewModel {
+    public func didFinishLoading(with feed: [FeedImage]) {
+        self.didFinishLoading(with: .init(feed: feed))
     }
 }
