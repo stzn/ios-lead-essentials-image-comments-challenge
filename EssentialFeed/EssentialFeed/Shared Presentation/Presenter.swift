@@ -50,9 +50,3 @@ public final class Presenter<V: ViewPresenter> {
         loadingView.display(LoadingViewModel(isLoading: false))
     }
 }
-
-extension Presenter where V.ViewModel == FeedViewModel {
-    public func didFinishLoading(with feed: [FeedImage]) {
-        self.didFinishLoading(with: .init(feed: feed))
-    }
-}
