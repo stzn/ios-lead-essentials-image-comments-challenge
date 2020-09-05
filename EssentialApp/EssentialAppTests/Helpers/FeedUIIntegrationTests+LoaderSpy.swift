@@ -2,23 +2,32 @@
 //  Copyright © 2019 Essential Developer. All rights reserved.
 //
 
+import Combine
 import Foundation
 import EssentialFeed
 import EssentialFeediOS
 
 extension FeedUIIntegrationTests {
 	
-	class LoaderSpy: FeedLoader, FeedImageDataLoader {
-		
-		// MARK: - FeedLoader
-		
-		private var feedRequests = [(FeedLoader.Result) -> Void]()
+    class LoaderSpy: FeedImageDataLoader {
+
+        typealias Result = Swift.Result<[FeedImage], Error>
+        typealias Publisher = AnyPublisher<[FeedImage], Error>
+
+        func loadPublisher() -> Publisher {
+            Deferred {
+                Future(self.load)
+            }
+            .eraseToAnyPublisher()
+        }
+
+        private var feedRequests: [(Result) -> Void] = []
 		
 		var loadFeedCallCount: Int {
 			return feedRequests.count
 		}
 		
-		func load(completion: @escaping (FeedLoader.Result) -> Void) {
+		func load(completion: @escaping (Result) -> Void) {
 			feedRequests.append(completion)
 		}
 		
