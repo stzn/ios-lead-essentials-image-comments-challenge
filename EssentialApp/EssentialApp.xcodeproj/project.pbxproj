@@ -42,6 +42,11 @@
 		D6E2FC5225046B0F0042A7D9 /* ImageCommentsUIIntegrationTests+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC5125046B0F0042A7D9 /* ImageCommentsUIIntegrationTests+Localization.swift */; };
 		D6E2FC5425046B5B0042A7D9 /* ImageCommentsUIIntegrationTests+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC5325046B5B0042A7D9 /* ImageCommentsUIIntegrationTests+Assertions.swift */; };
 		D6E2FC5625046BB00042A7D9 /* ImageCommentsUIIntegrationTests+LoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC5525046BB00042A7D9 /* ImageCommentsUIIntegrationTests+LoaderSpy.swift */; };
+		D6E2FC6D25048BE70042A7D9 /* ImageCommentsViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC6C25048BE70042A7D9 /* ImageCommentsViewController+TestHelpers.swift */; };
+		D6E2FC6F25048FA50042A7D9 /* ImageCommentsUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC6E25048FA50042A7D9 /* ImageCommentsUIComposer.swift */; };
+		D6E2FC71250490E60042A7D9 /* ImageCommentsLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC70250490E60042A7D9 /* ImageCommentsLoaderPresentationAdapter.swift */; };
+		D6E2FC73250491750042A7D9 /* ImageCommentsViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC72250491750042A7D9 /* ImageCommentsViewAdapter.swift */; };
+		D6E2FC772504A2700042A7D9 /* ImageCommentPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC762504A2700042A7D9 /* ImageCommentPresentationAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +112,11 @@
 		D6E2FC5125046B0F0042A7D9 /* ImageCommentsUIIntegrationTests+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentsUIIntegrationTests+Localization.swift"; sourceTree = "<group>"; };
 		D6E2FC5325046B5B0042A7D9 /* ImageCommentsUIIntegrationTests+Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentsUIIntegrationTests+Assertions.swift"; sourceTree = "<group>"; };
 		D6E2FC5525046BB00042A7D9 /* ImageCommentsUIIntegrationTests+LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentsUIIntegrationTests+LoaderSpy.swift"; sourceTree = "<group>"; };
+		D6E2FC6C25048BE70042A7D9 /* ImageCommentsViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentsViewController+TestHelpers.swift"; sourceTree = "<group>"; };
+		D6E2FC6E25048FA50042A7D9 /* ImageCommentsUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsUIComposer.swift; sourceTree = "<group>"; };
+		D6E2FC70250490E60042A7D9 /* ImageCommentsLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
+		D6E2FC72250491750042A7D9 /* ImageCommentsViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsViewAdapter.swift; sourceTree = "<group>"; };
+		D6E2FC762504A2700042A7D9 /* ImageCommentPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentPresentationAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +159,7 @@
 				D6E2FC5125046B0F0042A7D9 /* ImageCommentsUIIntegrationTests+Localization.swift */,
 				D6E2FC5325046B5B0042A7D9 /* ImageCommentsUIIntegrationTests+Assertions.swift */,
 				D6E2FC5525046BB00042A7D9 /* ImageCommentsUIIntegrationTests+LoaderSpy.swift */,
+				D6E2FC6C25048BE70042A7D9 /* ImageCommentsViewController+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -186,6 +197,10 @@
 				0895DA8F234B3B970031BB2D /* Assets.xcassets */,
 				0895DA91234B3B970031BB2D /* LaunchScreen.storyboard */,
 				0895DA94234B3B970031BB2D /* Info.plist */,
+				D6E2FC6E25048FA50042A7D9 /* ImageCommentsUIComposer.swift */,
+				D6E2FC70250490E60042A7D9 /* ImageCommentsLoaderPresentationAdapter.swift */,
+				D6E2FC72250491750042A7D9 /* ImageCommentsViewAdapter.swift */,
+				D6E2FC762504A2700042A7D9 /* ImageCommentPresentationAdapter.swift */,
 			);
 			path = EssentialApp;
 			sourceTree = "<group>";
@@ -314,14 +329,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6E2FC73250491750042A7D9 /* ImageCommentsViewAdapter.swift in Sources */,
+				D6E2FC71250490E60042A7D9 /* ImageCommentsLoaderPresentationAdapter.swift in Sources */,
 				08073B44238D2DFA00A75DC6 /* FeedUIComposer.swift in Sources */,
 				0895DA87234B3B950031BB2D /* AppDelegate.swift in Sources */,
+				D6E2FC6F25048FA50042A7D9 /* ImageCommentsUIComposer.swift in Sources */,
 				08073B45238D2DFA00A75DC6 /* FeedLoaderPresentationAdapter.swift in Sources */,
 				08073B47238D2DFA00A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */,
 				08073B48238D2DFA00A75DC6 /* WeakRefVirtualProxy.swift in Sources */,
 				0895DA89234B3B950031BB2D /* SceneDelegate.swift in Sources */,
 				08073B49238D2DFA00A75DC6 /* FeedViewAdapter.swift in Sources */,
 				0835BF6D24850F9800A793D2 /* CombineHelpers.swift in Sources */,
+				D6E2FC772504A2700042A7D9 /* ImageCommentPresentationAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +358,7 @@
 				08073B58238D2E1000A75DC6 /* FeedUIIntegrationTests+Localization.swift in Sources */,
 				08073B53238D2E1000A75DC6 /* UIButton+TestHelpers.swift in Sources */,
 				0851CDAE239AB19000C19B1D /* InMemoryFeedStore.swift in Sources */,
+				D6E2FC6D25048BE70042A7D9 /* ImageCommentsViewController+TestHelpers.swift in Sources */,
 				08073B59238D2E1000A75DC6 /* UIImage+TestHelpers.swift in Sources */,
 				0851CDAC239AB13100C19B1D /* HTTPClientStub.swift in Sources */,
 				D6E2FC5425046B5B0042A7D9 /* ImageCommentsUIIntegrationTests+Assertions.swift in Sources */,
