@@ -17,7 +17,7 @@ public final class FeedPresenter {
 }
 
 extension Presenter where V.ViewModel == FeedViewModel {
-    public func didFinishLoading(with feed: [FeedImage]) {
+    public func didFinishLoadingFeed(with feed: [FeedImage]) {
         self.didFinishLoading(with: .init(feed: feed))
     }
 }

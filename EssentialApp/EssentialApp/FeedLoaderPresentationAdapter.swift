@@ -29,7 +29,7 @@ final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
                         self?.presenter?.didFinishLoading(with: error)
                     }
                 }, receiveValue: { [weak self] feed in
-                    self?.presenter?.didFinishLoading(with: feed)
+                    self?.presenter?.didFinishLoadingFeed(with: feed)
                 })
 	}
 }
