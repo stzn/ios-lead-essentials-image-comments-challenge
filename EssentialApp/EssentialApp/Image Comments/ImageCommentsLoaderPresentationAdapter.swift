@@ -7,18 +7,18 @@ import EssentialFeed
 import EssentialFeediOS
 
 final class ImageCommentsLoaderPresentationAdapter: ImageCommentsViewControllerDelegate {
-    private let imageCommentsLoader: () -> AnyPublisher<[ImageComment], Swift.Error>
+    private let imageCommentsLoader: (FeedImage) -> AnyPublisher<[ImageComment], Swift.Error>
     private var cancellable: Cancellable?
     var presenter: Presenter<ImageCommentsViewAdapter>?
 
-    init(imageCommentsLoader: @escaping () -> AnyPublisher<[ImageComment], Swift.Error>) {
+    init(imageCommentsLoader: @escaping (FeedImage) -> AnyPublisher<[ImageComment], Swift.Error>) {
         self.imageCommentsLoader = imageCommentsLoader
     }
 
-    func didRequestImageCommentsRefresh() {
+    func didRequestImageCommentsRefresh(for feed: FeedImage) {
         presenter?.didStartLoading()
 
-        cancellable = imageCommentsLoader()
+        cancellable = imageCommentsLoader(feed)
             .dispatchOnMainQueue()
             .sink(
                 receiveCompletion: { [weak self] completion in

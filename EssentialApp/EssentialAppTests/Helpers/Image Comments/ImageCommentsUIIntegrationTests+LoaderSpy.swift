@@ -16,7 +16,7 @@ extension ImageCommentsUIIntegrationTests {
         typealias LoaderResult = Swift.Result<[ImageComment], Error>
         typealias LoaderPublisher = AnyPublisher<[ImageComment], Error>
 
-        func loadPublisher() -> LoaderPublisher {
+        func loadPublisher(_ feed: FeedImage) -> LoaderPublisher {
             Deferred {
                 Future(self.load)
             }

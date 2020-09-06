@@ -39,11 +39,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	}
 	
 	func configureWindow() {
-		window?.rootViewController = UINavigationController(
-			rootViewController: FeedUIComposer.feedComposedWith(
-				feedLoader: makeRemoteFeedLoaderWithLocalFallback,
-				imageLoader: makeLocalImageLoaderWithRemoteFallback))
-        
+        let feedViewController = FeedUIComposer.feedComposedWith(
+            feedLoader: makeRemoteFeedLoaderWithLocalFallback,
+            imageLoader: makeLocalImageLoaderWithRemoteFallback)
+
+        let navitgationController = UINavigationController(
+        rootViewController: feedViewController)
+		window?.rootViewController = navitgationController
+
+        feedViewController.didSelectFeedImage = { [navitgationController] model in
+            let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
+                feed: model,
+                imageCommentsLoader: self.makeRemoteImageCommentsLoader)
+            navitgationController.pushViewController(commentsViewController, animated: true)
+        }
+
         window?.makeKeyAndVisible()
 	}
 	
@@ -72,5 +82,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     .tryMap(FeedImageDataMapper.map)
                     .caching(to: localImageLoader, using: url)
             })
+    }
+
+    private func makeRemoteImageCommentsLoader(_ model: FeedImage) -> AnyPublisher<[ImageComment], Swift.Error> {
+        let remoteURL = URL(string: "http://image-comments-challenge.essentialdeveloper.com/image/\(model.id)/comments")!
+        return httpClient
+            .getPublisher(from: remoteURL)
+            .tryMap(ImageCommentsMapper.map)
+            .eraseToAnyPublisher()
     }
 }

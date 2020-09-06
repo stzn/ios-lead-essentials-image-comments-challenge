@@ -13,9 +13,11 @@ public protocol FeedImageCellControllerDelegate {
 public final class FeedImageCellController: FeedImageView {
 	private let delegate: FeedImageCellControllerDelegate
 	private var cell: FeedImageCell?
+    public let feed: FeedImage
 	
-	public init(delegate: FeedImageCellControllerDelegate) {
+	public init(delegate: FeedImageCellControllerDelegate, feed: FeedImage) {
 		self.delegate = delegate
+        self.feed = feed
 	}
 	
 	func view(in tableView: UITableView) -> UITableViewCell {

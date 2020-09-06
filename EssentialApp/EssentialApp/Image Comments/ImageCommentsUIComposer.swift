@@ -13,13 +13,15 @@ public final class ImageCommentsUIComposer {
     private init() {}
 
     public static func imageCommnetsComposedWith(
-        imageCommentsLoader: @escaping () -> AnyPublisher<[ImageComment], Swift.Error>
+        feed: FeedImage,
+        imageCommentsLoader: @escaping (FeedImage) -> AnyPublisher<[ImageComment], Swift.Error>
     ) -> ImageCommentsViewController {
         let presentationAdapter = ImageCommentsLoaderPresentationAdapter(imageCommentsLoader: imageCommentsLoader)
 
         let imageCommentsController = makeImageCommentsViewController(
-            delegate: presentationAdapter,
-            title: ImageCommentsPresenter.title)
+            feed: feed,
+            title: ImageCommentsPresenter.title,
+            delegate: presentationAdapter)
 
         presentationAdapter.presenter = Presenter(
             view: ImageCommentsViewAdapter(
@@ -30,12 +32,18 @@ public final class ImageCommentsUIComposer {
         return imageCommentsController
     }
 
-    private static func makeImageCommentsViewController(delegate: ImageCommentsViewControllerDelegate, title: String) -> ImageCommentsViewController {
+    private static func makeImageCommentsViewController(
+        feed: FeedImage, title: String, delegate: ImageCommentsViewControllerDelegate) -> ImageCommentsViewController {
         let bundle = Bundle(for: ImageCommentsViewController.self)
         let storyboard = UIStoryboard(name: "ImageComments", bundle: bundle)
-        let imageCommnetsController = storyboard.instantiateInitialViewController() as! ImageCommentsViewController
-        imageCommnetsController.delegate = delegate
-        imageCommnetsController.title = title
-        return imageCommnetsController
+        let imageCommnetsController = storyboard.instantiateInitialViewController { coder in
+            ImageCommentsViewController(coder: coder, feed: feed, title: title, delegate: delegate)
+        }
+
+        guard let viewController = imageCommnetsController else {
+            fatalError()
+        }
+        viewController.title = title
+        return viewController
     }
 }

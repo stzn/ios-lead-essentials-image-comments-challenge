@@ -95,13 +95,22 @@ class FeedSnapshotTests: XCTestCase {
 private extension FeedViewController {
 	func display(_ stubs: [ImageStub]) {
 		let cells: [FeedImageCellController] = stubs.map { stub in
-			let cellController = FeedImageCellController(delegate: stub)
+            let cellController = FeedImageCellController(delegate: stub,
+                                                         feed: uniqueFeed)
 			stub.controller = cellController
 			return cellController
 		}
 		
 		display(cells)
 	}
+
+    private var uniqueFeed: FeedImage {
+        FeedImage(id: UUID(), description: "any", location: "any", url: anyURL)
+    }
+
+    private var anyURL: URL {
+        URL(string: "http://any-url.com")!
+    }
 }
 
 private class ImageStub: FeedImageCellControllerDelegate {

@@ -19,6 +19,8 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
 	}
 
 	public var delegate: FeedViewControllerDelegate?
+
+    public var didSelectFeedImage: ((FeedImage) -> Void)?
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
@@ -81,4 +83,10 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
 		loadingControllers[indexPath]?.cancelLoad()
         loadingControllers[indexPath] = nil
 	}
+
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        let cellController = tableModel[indexPath.row]
+        didSelectFeedImage?(cellController.feed)
+    }
 }
