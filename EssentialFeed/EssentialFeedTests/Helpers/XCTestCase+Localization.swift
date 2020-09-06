@@ -6,7 +6,7 @@ import XCTest
 
 extension XCTestCase {
     typealias LocalizedBundle = (bundle: Bundle, localization: String)
-
+    
     func allLocalizationBundles(in bundle: Bundle, file: StaticString = #file, line: UInt = #line) -> [LocalizedBundle] {
         return bundle.localizations.compactMap { localization in
             guard
@@ -16,11 +16,11 @@ extension XCTestCase {
                 XCTFail("Couldn't find bundle for localization: \(localization)", file: file, line: line)
                 return nil
             }
-
+            
             return (localizedBundle, localization)
         }
     }
-
+    
     func allLocalizedStringKeys(in bundles: [LocalizedBundle], table: String, file: StaticString = #file, line: UInt = #line) -> Set<String> {
         return bundles.reduce([]) { (acc, current) in
             guard
@@ -31,7 +31,7 @@ extension XCTestCase {
                 XCTFail("Couldn't load localized strings for localization: \(current.localization)", file: file, line: line)
                 return acc
             }
-
+            
             return acc.union(Set(keys))
         }
     }

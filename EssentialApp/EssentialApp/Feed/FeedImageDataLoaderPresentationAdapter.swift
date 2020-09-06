@@ -8,21 +8,21 @@ import EssentialFeed
 import EssentialFeediOS
 
 final class FeedImageDataLoaderPresentationAdapter<View: FeedImageView, Image>: FeedImageCellControllerDelegate where View.Image == Image {
-	private let model: FeedImage
+    private let model: FeedImage
     private let imageLoader: (URL) -> AnyPublisher<Data, Swift.Error>
-	private var cancellable: Cancellable?
-	
-	var presenter: FeedImagePresenter<View, Image>?
-	
-	init(model: FeedImage, imageLoader: @escaping (URL) -> AnyPublisher<Data, Swift.Error>) {
-		self.model = model
-		self.imageLoader = imageLoader
-	}
-	
-	func didRequestImage() {
-		presenter?.didStartLoadingImageData(for: model)
-		
-		let model = self.model
+    private var cancellable: Cancellable?
+    
+    var presenter: FeedImagePresenter<View, Image>?
+    
+    init(model: FeedImage, imageLoader: @escaping (URL) -> AnyPublisher<Data, Swift.Error>) {
+        self.model = model
+        self.imageLoader = imageLoader
+    }
+    
+    func didRequestImage() {
+        presenter?.didStartLoadingImageData(for: model)
+        
+        let model = self.model
         
         cancellable = imageLoader(model.url)
             .dispatchOnMainQueue()
@@ -38,9 +38,9 @@ final class FeedImageDataLoaderPresentationAdapter<View: FeedImageView, Image>: 
                 }, receiveValue: { [weak self] data in
                     self?.presenter?.didFinishLoadingImageData(with: data, for: model)
                 })
-	}
-	
-	func didCancelImageRequest() {
-		cancellable?.cancel()
-	}
+    }
+    
+    func didCancelImageRequest() {
+        cancellable?.cancel()
+    }
 }

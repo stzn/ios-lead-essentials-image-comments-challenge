@@ -9,11 +9,11 @@ extension ImageCommentCell {
     var messageText: String {
         return messageLabel.text ?? ""
     }
-
+    
     var createdAtText: String {
         return createdAtLabel.text ?? ""
     }
-
+    
     var usernameText: String {
         return usernameLabel.text ?? ""
     }

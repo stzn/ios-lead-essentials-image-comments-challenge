@@ -9,9 +9,9 @@ class FeedPresenterTests: XCTestCase {
     func test_title_isLocalized() {
         XCTAssertEqual(FeedPresenter.title, localized(FeedPresenter.titleKey))
     }
-
+    
     // MARK: - Helpers
-
+    
     private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
         let table = FeedPresenter.stringsFileName
         let bundle = Bundle(for: FeedPresenter.self)

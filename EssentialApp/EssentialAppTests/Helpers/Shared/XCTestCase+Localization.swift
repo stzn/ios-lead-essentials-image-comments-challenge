@@ -16,7 +16,7 @@ extension XCTestCase {
         }
         return value
     }
-
+    
     private class NeverView: ViewPresenter {
         func display(_ viewModel: Never) {}
         typealias ViewModel = Never

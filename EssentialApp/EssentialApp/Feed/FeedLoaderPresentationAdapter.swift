@@ -9,15 +9,15 @@ import EssentialFeediOS
 final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
     private let feedLoader: () -> AnyPublisher<[FeedImage], Swift.Error>
     private var cancellable: Cancellable?
-	var presenter: Presenter<FeedViewAdapter>?
-	
-	init(feedLoader: @escaping () -> AnyPublisher<[FeedImage], Swift.Error>) {
-		self.feedLoader = feedLoader
-	}
-	
-	func didRequestFeedRefresh() {
-		presenter?.didStartLoading()
-		
+    var presenter: Presenter<FeedViewAdapter>?
+    
+    init(feedLoader: @escaping () -> AnyPublisher<[FeedImage], Swift.Error>) {
+        self.feedLoader = feedLoader
+    }
+    
+    func didRequestFeedRefresh() {
+        presenter?.didStartLoading()
+        
         cancellable = feedLoader()
             .dispatchOnMainQueue()
             .sink(
@@ -31,5 +31,5 @@ final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
                 }, receiveValue: { [weak self] feed in
                     self?.presenter?.didFinishLoadingFeed(with: feed)
                 })
-	}
+    }
 }

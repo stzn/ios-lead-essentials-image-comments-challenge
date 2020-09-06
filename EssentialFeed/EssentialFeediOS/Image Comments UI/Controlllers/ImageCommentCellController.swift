@@ -12,7 +12,7 @@ public protocol ImageCommentCellControllerDelegate {
 public final class ImageCommentCellController: ImageCommentView {
     private var cell: ImageCommentCell?
     private let delegate: ImageCommentCellControllerDelegate
-
+    
     public init(delegate: ImageCommentCellControllerDelegate) {
         self.delegate = delegate
     }
@@ -22,7 +22,7 @@ public final class ImageCommentCellController: ImageCommentView {
         delegate.didRequestImageComment()
         return cell!
     }
-
+    
     public func display(_ viewModel: ImageCommentViewModel) {
         cell?.usernameLabel.text = viewModel.username
         cell?.messageLabel.text = viewModel.message

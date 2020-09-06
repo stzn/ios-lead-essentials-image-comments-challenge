@@ -8,7 +8,7 @@ import EssentialFeed
 
 extension HTTPClient {
     typealias Publisher = AnyPublisher<(Data, HTTPURLResponse), Error>
-
+    
     func getPublisher(from url: URL) -> Publisher {
         var task: HTTPClientTask?
         return Deferred {
@@ -53,7 +53,7 @@ private extension FeedImageDataCache {
 
 public extension LocalFeedLoader {
     typealias Publisher = AnyPublisher<[FeedImage], Error>
-
+    
     func loadPublisher() -> Publisher {
         Deferred {
             Future(self.load)
@@ -120,7 +120,7 @@ extension DispatchQueue {
             guard isMainQueue() else {
                 return DispatchQueue.main.schedule(options: options, action)
             }
-                        
+            
             action()
         }
         

@@ -9,11 +9,11 @@ import EssentialFeediOS
 
 final class ImageCommentsViewAdapter: ViewPresenter {
     private weak var controller: ImageCommentsViewController?
-
+    
     init(controller: ImageCommentsViewController) {
         self.controller = controller
     }
-
+    
     func display(_ viewModel: ImageCommentsViewModel) {
         controller?.display(viewModel.comments.map { model in
             let adapter = ImageCommentPresentationAdapter<WeakRefVirtualProxy<ImageCommentCellController>>(model: model)

@@ -8,24 +8,24 @@ import XCTest
 @testable import EssentialFeed
 
 class ImageCommentsSnapshotTests: XCTestCase {
-
+    
     func test_emptyFeed() {
         let sut = makeSUT()
-
+        
         sut.display(emptyImageComment())
-
+        
         assert(
             snapshot: sut.snapshot(for: .iPhone8(style: .light)),
             named: "EMPTY_IMAGE_COMMENTS_light")
         assert(
             snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "EMPTY_IMAGE_COMMENTS_dark")
     }
-
+    
     func test_imageCommentWithContent() {
         let sut = makeSUT()
-
+        
         sut.display(imageCommentWithContent())
-
+        
         assert(
             snapshot: sut.snapshot(for: .iPhone8(style: .light)),
             named: "IMAGE_COMMENTS_WITH_CONTENT_light")
@@ -33,12 +33,12 @@ class ImageCommentsSnapshotTests: XCTestCase {
             snapshot: sut.snapshot(for: .iPhone8(style: .dark)),
             named: "IMAGE_COMMENTS_WITH_CONTENT_dark")
     }
-
+    
     func test_feedWithErrorMessage() {
         let sut = makeSUT()
-
+        
         sut.display(.error(message: "This is a\nmulti-line\nerror message"))
-
+        
         assert(
             snapshot: sut.snapshot(for: .iPhone8(style: .light)),
             named: "IMAGE_COMMENTS_WITH_ERROR_MESSAGE_light")
@@ -46,9 +46,9 @@ class ImageCommentsSnapshotTests: XCTestCase {
             snapshot: sut.snapshot(for: .iPhone8(style: .dark)),
             named: "IMAGE_COMMENTS_WITH_ERROR_MESSAGE_dark")
     }
-
+    
     // MARK: - Helpers
-
+    
     private func makeSUT() -> ImageCommentsViewController {
         let bundle = Bundle(for: ImageCommentsViewController.self)
         let storyboard = UIStoryboard(name: "ImageComments", bundle: bundle)
@@ -56,7 +56,7 @@ class ImageCommentsSnapshotTests: XCTestCase {
             ImageCommentsViewController(coder: coder, feed: self.uniqueFeed,
                                         title: ImageCommentsPresenter.titleKey, delegate: ImageCommentsStub())
         }
-
+        
         guard let controller = imageCommnetsController else {
             fatalError()
         }
@@ -65,19 +65,19 @@ class ImageCommentsSnapshotTests: XCTestCase {
         controller.tableView.showsHorizontalScrollIndicator = false
         return controller
     }
-
+    
     private func emptyImageComment() -> [ImageCommentCellController] {
         return []
     }
-
+    
     private func imageCommentWithContent() -> [ImageCommentStub] {
         let now = Date()
-
+        
         let oneDayInterval: TimeInterval = 60 * 60 * 24
         let oneWeekInterval: TimeInterval = oneDayInterval * 7
         let aboutOneMonthInterval: TimeInterval = oneWeekInterval * 5
         let aboutOneYearInterval: TimeInterval = aboutOneMonthInterval * 12
-
+        
         let yeasterdayString = ImageCommentDateFormatter.format(
             from: now.adding(seconds: -oneDayInterval - 1))
         let lastWeekString = ImageCommentDateFormatter.format(
@@ -86,7 +86,7 @@ class ImageCommentsSnapshotTests: XCTestCase {
             from: now.adding(seconds: -aboutOneMonthInterval - 1))
         let lastYearString = ImageCommentDateFormatter.format(
             from: now.adding(seconds: -aboutOneYearInterval - 1))
-
+        
         return [
             ImageCommentStub(
                 username: "user a",
@@ -106,11 +106,11 @@ class ImageCommentsSnapshotTests: XCTestCase {
                 createdAt: lastYearString),
         ]
     }
-
+    
     private var uniqueFeed: FeedImage {
         FeedImage(id: UUID(), description: "any", location: "any", url: anyURL)
     }
-
+    
     private var anyURL: URL {
         URL(string: "http://any-url.com")!
     }
@@ -123,7 +123,7 @@ extension ImageCommentsViewController {
             stub.controller = cellController
             return cellController
         }
-
+        
         display(cells)
     }
 }
@@ -131,14 +131,14 @@ extension ImageCommentsViewController {
 private class ImageCommentStub: ImageCommentCellControllerDelegate {
     let viewModel: ImageCommentViewModel
     weak var controller: ImageCommentCellController?
-
+    
     init(username: String, message: String, createdAt: String) {
         viewModel = ImageCommentViewModel(
             username: username,
             message: message,
             createdAt: createdAt)
     }
-
+    
     func didRequestImageComment() {
         controller?.display(viewModel)
     }

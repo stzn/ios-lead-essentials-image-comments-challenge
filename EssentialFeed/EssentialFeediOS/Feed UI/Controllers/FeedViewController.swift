@@ -6,84 +6,84 @@ import UIKit
 import EssentialFeed
 
 public protocol FeedViewControllerDelegate {
-	func didRequestFeedRefresh()
+    func didRequestFeedRefresh()
 }
 
 public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching, LoadingViewPresenter, ErrorViewPresenter {
-	@IBOutlet private(set) public var errorView: ErrorView?
-
+    @IBOutlet private(set) public var errorView: ErrorView?
+    
     private var loadingControllers = [IndexPath: FeedImageCellController]()
     
-	private var tableModel = [FeedImageCellController]() {
-		didSet { tableView.reloadData() }
-	}
-
-	public var delegate: FeedViewControllerDelegate?
-
+    private var tableModel = [FeedImageCellController]() {
+        didSet { tableView.reloadData() }
+    }
+    
+    public var delegate: FeedViewControllerDelegate?
+    
     public var didSelectFeedImage: ((FeedImage) -> Void)?
-	
-	public override func viewDidLoad() {
-		super.viewDidLoad()
-		
-		refresh()
-	}
-	
-	public override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-
-		tableView.sizeTableHeaderToFit()
-	}
-	
-	@IBAction private func refresh() {
-		delegate?.didRequestFeedRefresh()
-	}
-	
-	public func display(_ cellControllers: [FeedImageCellController]) {
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        refresh()
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.sizeTableHeaderToFit()
+    }
+    
+    @IBAction private func refresh() {
+        delegate?.didRequestFeedRefresh()
+    }
+    
+    public func display(_ cellControllers: [FeedImageCellController]) {
         loadingControllers = [:]
-		tableModel = cellControllers
-	}
-
-	public func display(_ viewModel: LoadingViewModel) {
-		refreshControl?.update(isRefreshing: viewModel.isLoading)
-	}
-	
-	public func display(_ viewModel: ErrorViewModel) {
-		errorView?.message = viewModel.message
-	}
-
-	public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return tableModel.count
-	}
-	
-	public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return cellController(forRowAt: indexPath).view(in: tableView)
-	}
-	
-	public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		cancelCellControllerLoad(forRowAt: indexPath)
-	}
-	
-	public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-		indexPaths.forEach { indexPath in
-			cellController(forRowAt: indexPath).preload()
-		}
-	}
-	
-	public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-		indexPaths.forEach(cancelCellControllerLoad)
-	}
-	
-	private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
-		let controller = tableModel[indexPath.row]
+        tableModel = cellControllers
+    }
+    
+    public func display(_ viewModel: LoadingViewModel) {
+        refreshControl?.update(isRefreshing: viewModel.isLoading)
+    }
+    
+    public func display(_ viewModel: ErrorViewModel) {
+        errorView?.message = viewModel.message
+    }
+    
+    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableModel.count
+    }
+    
+    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return cellController(forRowAt: indexPath).view(in: tableView)
+    }
+    
+    public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cancelCellControllerLoad(forRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { indexPath in
+            cellController(forRowAt: indexPath).preload()
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach(cancelCellControllerLoad)
+    }
+    
+    private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
+        let controller = tableModel[indexPath.row]
         loadingControllers[indexPath] = controller
         return controller
-	}
-	
-	private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
-		loadingControllers[indexPath]?.cancelLoad()
+    }
+    
+    private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
+        loadingControllers[indexPath]?.cancelLoad()
         loadingControllers[indexPath] = nil
-	}
-
+    }
+    
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let cellController = tableModel[indexPath.row]
