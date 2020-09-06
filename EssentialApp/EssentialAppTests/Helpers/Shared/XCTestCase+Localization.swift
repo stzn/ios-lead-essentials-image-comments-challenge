@@ -6,14 +6,19 @@ import Foundation
 import XCTest
 import EssentialFeed
 
-extension ImageCommentsUIIntegrationTests {
-    func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
-        let table = ImageCommentsPresenter.stringsFileName
-        let bundle = Bundle(for: ImageCommentsPresenter.self)
+extension XCTestCase {
+    func sharedLocalized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
+        let table = SharedLocalizationInfo.stringsFileName
+        let bundle = Bundle(for: Presenter<NeverView>.self)
         let value = bundle.localizedString(forKey: key, value: nil, table: table)
         if value == key {
             XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
         }
         return value
+    }
+
+    private class NeverView: ViewPresenter {
+        func display(_ viewModel: Never) {}
+        typealias ViewModel = Never
     }
 }
