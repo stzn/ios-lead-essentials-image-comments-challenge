@@ -35,8 +35,28 @@ public final class ImageCommentsViewController: UITableViewController, LoadingVi
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        configureNavigationBar()
         refresh()
+    }
+
+    private func configureNavigationBar() {
+        navigationItem.standardAppearance = navigatioBarAppearance
+        navigationController?.navigationBar.tintColor = .secondaryLabel
+    }
+
+    private var navigatioBarAppearance: UINavigationBarAppearance {
+        let standard = UINavigationBarAppearance()
+        standard.configureWithTransparentBackground()
+        standard.backgroundImage = UIImage()
+        standard.shadowImage = UIImage()
+        standard.backButtonAppearance = barButtionItemAppearance
+        return standard
+    }
+
+    private var barButtionItemAppearance: UIBarButtonItemAppearance {
+        let button = UIBarButtonItemAppearance(style: .plain)
+        button.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGray]
+        return button
     }
 
     public override func viewDidLayoutSubviews() {

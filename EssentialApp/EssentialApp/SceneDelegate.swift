@@ -43,15 +43,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             feedLoader: makeRemoteFeedLoaderWithLocalFallback,
             imageLoader: makeLocalImageLoaderWithRemoteFallback)
 
-        let navitgationController = UINavigationController(
+        let navigationController = UINavigationController(
         rootViewController: feedViewController)
-		window?.rootViewController = navitgationController
+		window?.rootViewController = navigationController
 
-        feedViewController.didSelectFeedImage = { [navitgationController] model in
+        feedViewController.didSelectFeedImage = { [navigationController, feedViewController] model in
             let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
                 feed: model,
                 imageCommentsLoader: self.makeRemoteImageCommentsLoader)
-            navitgationController.pushViewController(commentsViewController, animated: true)
+
+            feedViewController.navigationItem.backBarButtonItem
+                = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+            navigationController.pushViewController(commentsViewController, animated: true)
         }
 
         window?.makeKeyAndVisible()
