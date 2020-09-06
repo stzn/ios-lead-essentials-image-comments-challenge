@@ -20,7 +20,7 @@ final class ImageCommentsViewAdapter: ViewPresenter {
             let view = ImageCommentCellController(delegate: adapter)
             adapter.presenter = ImageCommentPresenter(
                 view: WeakRefVirtualProxy(view),
-                dateFormatter: DateFormatter().string(from:))            
+                dateFormatter: { ImageCommentDateFormatter.format(from: $0) })
             return view
         })
     }

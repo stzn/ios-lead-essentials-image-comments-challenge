@@ -48,6 +48,7 @@
 		D6E2FC73250491750042A7D9 /* ImageCommentsViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC72250491750042A7D9 /* ImageCommentsViewAdapter.swift */; };
 		D6E2FC772504A2700042A7D9 /* ImageCommentPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC762504A2700042A7D9 /* ImageCommentPresentationAdapter.swift */; };
 		D6E2FC7E2504ACD40042A7D9 /* XCTestCase+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC7D2504ACD40042A7D9 /* XCTestCase+Localization.swift */; };
+		D6E2FC802504AF2F0042A7D9 /* ImageCommentCell+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC7F2504AF2F0042A7D9 /* ImageCommentCell+TestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		D6E2FC72250491750042A7D9 /* ImageCommentsViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsViewAdapter.swift; sourceTree = "<group>"; };
 		D6E2FC762504A2700042A7D9 /* ImageCommentPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentPresentationAdapter.swift; sourceTree = "<group>"; };
 		D6E2FC7D2504ACD40042A7D9 /* XCTestCase+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Localization.swift"; sourceTree = "<group>"; };
+		D6E2FC7F2504AF2F0042A7D9 /* ImageCommentCell+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentCell+TestHelpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 				D6E2FC5325046B5B0042A7D9 /* ImageCommentsUIIntegrationTests+Assertions.swift */,
 				D6E2FC5525046BB00042A7D9 /* ImageCommentsUIIntegrationTests+LoaderSpy.swift */,
 				D6E2FC6C25048BE70042A7D9 /* ImageCommentsViewController+TestHelpers.swift */,
+				D6E2FC7F2504AF2F0042A7D9 /* ImageCommentCell+TestHelpers.swift */,
 			);
 			path = "Image Comments";
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				082C00062359E4C6008927D3 /* SharedTestHelpers.swift in Sources */,
 				08073B57238D2E1000A75DC6 /* UIControl+TestHelpers.swift in Sources */,
 				08073B56238D2E1000A75DC6 /* FeedUIIntegrationTests+Assertions.swift in Sources */,
+				D6E2FC802504AF2F0042A7D9 /* ImageCommentCell+TestHelpers.swift in Sources */,
 				0832C9D0238D2811002314C9 /* SceneDelegateTests.swift in Sources */,
 				08073B5B238D2E1000A75DC6 /* FeedViewController+TestHelpers.swift in Sources */,
 				08073B58238D2E1000A75DC6 /* FeedUIIntegrationTests+Localization.swift in Sources */,

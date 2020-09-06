@@ -99,6 +99,8 @@
 		D6E2FC67250489D10042A7D9 /* ImageCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC65250489D10042A7D9 /* ImageCommentsViewController.swift */; };
 		D6E2FC6B25048AE80042A7D9 /* ImageCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC6A25048AE80042A7D9 /* ImageCommentCell.swift */; };
 		D6E2FC7525049AEC0042A7D9 /* ImageComments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6E2FC7425049AEC0042A7D9 /* ImageComments.storyboard */; };
+		D6E2FC822504B06F0042A7D9 /* ImageCommentDateFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC812504B06F0042A7D9 /* ImageCommentDateFormatterTests.swift */; };
+		D6E2FC842504B7FC0042A7D9 /* ImageCommentDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC832504B7FC0042A7D9 /* ImageCommentDateFormatter.swift */; };
 		D6EAC92F2501858100A60896 /* ImageCommentsMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EAC92E2501858100A60896 /* ImageCommentsMapperTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -223,6 +225,8 @@
 		D6E2FC65250489D10042A7D9 /* ImageCommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCommentsViewController.swift; sourceTree = "<group>"; };
 		D6E2FC6A25048AE80042A7D9 /* ImageCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentCell.swift; sourceTree = "<group>"; };
 		D6E2FC7425049AEC0042A7D9 /* ImageComments.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageComments.storyboard; sourceTree = "<group>"; };
+		D6E2FC812504B06F0042A7D9 /* ImageCommentDateFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentDateFormatterTests.swift; sourceTree = "<group>"; };
+		D6E2FC832504B7FC0042A7D9 /* ImageCommentDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentDateFormatter.swift; sourceTree = "<group>"; };
 		D6EAC92E2501858100A60896 /* ImageCommentsMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsMapperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -580,6 +584,7 @@
 				D6E2FC1E250375F30042A7D9 /* ImageCommentsPresenterTests.swift */,
 				D6E2FC45250429F10042A7D9 /* ImmageCommentsLocalizationTests.swift */,
 				D6E2FC5D25047B970042A7D9 /* ImageCommentPresenterTests.swift */,
+				D6E2FC812504B06F0042A7D9 /* ImageCommentDateFormatterTests.swift */,
 			);
 			path = "Image Comments Presentation";
 			sourceTree = "<group>";
@@ -592,6 +597,7 @@
 				D6E2FC2D25037A980042A7D9 /* Comments.strings */,
 				D6E2FC5F2504813B0042A7D9 /* ImageCommentPresenter.swift */,
 				D6E2FC61250481810042A7D9 /* ImageCommentViewModel.swift */,
+				D6E2FC832504B7FC0042A7D9 /* ImageCommentDateFormatter.swift */,
 			);
 			path = "Image Comments Presentation";
 			sourceTree = "<group>";
@@ -858,6 +864,7 @@
 				08604505233E316F005ECD22 /* CoreDataFeedStore+FeedStore.swift in Sources */,
 				0886893A221DAA34007BC3E7 /* LocalFeedImage.swift in Sources */,
 				D6E2FC62250481810042A7D9 /* ImageCommentViewModel.swift in Sources */,
+				D6E2FC842504B7FC0042A7D9 /* ImageCommentDateFormatter.swift in Sources */,
 				089C40DE22170F2300DE552E /* FeedStore.swift in Sources */,
 				D6E2FC24250377B90042A7D9 /* ImageCommentsViewModel.swift in Sources */,
 				089C40DC22170EC500DE552E /* LocalFeedLoader.swift in Sources */,
@@ -890,6 +897,7 @@
 			files = (
 				081C0DB122491E1200AC754E /* FeedCacheTestHelpers.swift in Sources */,
 				D6E2FC4E250468680042A7D9 /* SharedLocalizationTests.swift in Sources */,
+				D6E2FC822504B06F0042A7D9 /* ImageCommentDateFormatterTests.swift in Sources */,
 				08805A19233A9F8600509F19 /* URLProtocolStub.swift in Sources */,
 				081C0DAF22491A2400AC754E /* ValidateFeedCacheUseCaseTests.swift in Sources */,
 				D6E2FC5E25047B970042A7D9 /* ImageCommentPresenterTests.swift in Sources */,
