@@ -16,7 +16,6 @@ final class ImageCommentPresentationAdapter<View: ImageCommentView>: ImageCommen
     }
 
     func didRequestImageComment() {
-        let model = self.model
         presenter?.didFinishLoadingComment(with: model)
     }
 }
