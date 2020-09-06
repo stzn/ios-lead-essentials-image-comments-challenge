@@ -42,7 +42,7 @@ class PresenterTests: XCTestCase {
         sut.didFinishLoading(with: anyNSError())
 
         XCTAssertEqual(view.messages, [
-            .display(errorMessage: localized("VIEW_CONNECTION_ERROR")),
+            .display(errorMessage: localized(SharedLocalizationInfo.connectionErrorKey)),
             .display(isLoading: false)
         ])
     }
@@ -58,7 +58,7 @@ class PresenterTests: XCTestCase {
     }
 
     private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
-        let table = "Presenter"
+        let table = SharedLocalizationInfo.stringsFileName
         let bundle = Bundle(for: Presenter<ViewSpy>.self)
         let value = bundle.localizedString(forKey: key, value: nil, table: table)
         if value == key {

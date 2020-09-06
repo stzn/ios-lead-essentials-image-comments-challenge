@@ -23,8 +23,8 @@ public final class Presenter<V: ViewPresenter> {
     private let errorView: ErrorViewPresenter
 
     private var loadError: String {
-        return NSLocalizedString("VIEW_CONNECTION_ERROR",
-                tableName: "Presenter",
+        return NSLocalizedString(SharedLocalizationInfo.connectionErrorKey,
+                                 tableName: SharedLocalizationInfo.stringsFileName,
                 bundle: Bundle(for: Presenter.self),
                 comment: "Error message displayed when we can't load the image feed from the server")
     }
