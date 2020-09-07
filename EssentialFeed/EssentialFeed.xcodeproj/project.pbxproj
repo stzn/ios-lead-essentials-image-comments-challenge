@@ -539,7 +539,6 @@
 		08EFB82C22D4A60300A46837 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				08A3F2B5232AA67200127C15 /* Helpers */,
 				08B5EB4D22CE244400FE8683 /* FeedImageCell.swift */,
 				08A3F2B1232AA1C200127C15 /* ErrorView.swift */,
 				0822D0F023056FEB004B3345 /* Feed.storyboard */,
@@ -551,6 +550,7 @@
 		08FC5AA622D5F33000148E12 /* Feed UI */ = {
 			isa = PBXGroup;
 			children = (
+				08A3F2B5232AA67200127C15 /* Helpers */,
 				08EFB82A22D4A5F600A46837 /* Controllers */,
 				08EFB82C22D4A60300A46837 /* Views */,
 			);
