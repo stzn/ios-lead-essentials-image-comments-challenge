@@ -509,7 +509,7 @@
 		08D917A122B92A5D003BC31B /* EssentialFeediOS */ = {
 			isa = PBXGroup;
 			children = (
-				D64D7ECC250616CA00378982 /* Shared */,
+				D64D7ECC250616CA00378982 /* Shared UI */,
 				D6E2FC63250489C00042A7D9 /* Image Comments UI */,
 				08D917A322B92A5D003BC31B /* Info.plist */,
 				08FC5AA622D5F33000148E12 /* Feed UI */,
@@ -580,13 +580,13 @@
 			path = "Shared API Infra";
 			sourceTree = "<group>";
 		};
-		D64D7ECC250616CA00378982 /* Shared */ = {
+		D64D7ECC250616CA00378982 /* Shared UI */ = {
 			isa = PBXGroup;
 			children = (
 				08A3F2B5232AA67200127C15 /* Helpers */,
 				D64D7ECD2506170600378982 /* Views */,
 			);
-			path = Shared;
+			path = "Shared UI";
 			sourceTree = "<group>";
 		};
 		D64D7ECD2506170600378982 /* Views */ = {
