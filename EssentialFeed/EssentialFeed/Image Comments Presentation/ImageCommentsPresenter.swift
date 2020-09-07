@@ -11,7 +11,7 @@ public final class ImageCommentsPresenter {
         return NSLocalizedString(titleKey,
             tableName: stringsFileName,
             bundle: Bundle(for: ImageCommentsPresenter.self),
-            comment: "Title for the feed view")
+            comment: "Title for the comments view")
     }
 }
 
