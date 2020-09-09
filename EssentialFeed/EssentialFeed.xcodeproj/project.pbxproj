@@ -93,6 +93,7 @@
 		D64D7EEA2509687D00378982 /* XCTestCase+LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EE92509687D00378982 /* XCTestCase+LocalizedString.swift */; };
 		D64D7EF325096B7600378982 /* PresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EF225096B7600378982 /* PresenterTests.swift */; };
 		D64D7EF625096BC400378982 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EF525096BC400378982 /* Presenter.swift */; };
+		D64D7EF925096D3900378982 /* Shared.strings in Resources */ = {isa = PBXBuildFile; fileRef = D64D7EFB25096D3900378982 /* Shared.strings */; };
 		D6E2FC1C25034D9B0042A7D9 /* FeedImageDataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E2FC1B25034D9B0042A7D9 /* FeedImageDataMapper.swift */; };
 		D6EAC92F2501858100A60896 /* ImageCommentsMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EAC92E2501858100A60896 /* ImageCommentsMapperTests.swift */; };
 /* End PBXBuildFile section */
@@ -210,6 +211,9 @@
 		D64D7EE92509687D00378982 /* XCTestCase+LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+LocalizedString.swift"; sourceTree = "<group>"; };
 		D64D7EF225096B7600378982 /* PresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTests.swift; sourceTree = "<group>"; };
 		D64D7EF525096BC400378982 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		D64D7EFA25096D3900378982 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Shared.strings; sourceTree = "<group>"; };
+		D64D7EFC25096D3D00378982 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Shared.strings; sourceTree = "<group>"; };
+		D64D7EFD25096D3E00378982 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Shared.strings"; sourceTree = "<group>"; };
 		D6E2FC1B25034D9B0042A7D9 /* FeedImageDataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataMapper.swift; sourceTree = "<group>"; };
 		D6EAC92E2501858100A60896 /* ImageCommentsMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsMapperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -599,6 +603,7 @@
 			isa = PBXGroup;
 			children = (
 				D64D7EF525096BC400378982 /* Presenter.swift */,
+				D64D7EFB25096D3900378982 /* Shared.strings */,
 			);
 			path = "Shared Presentation";
 			sourceTree = "<group>";
@@ -769,6 +774,7 @@
 			files = (
 				D64D7EDC250849DF00378982 /* ImageComments.strings in Resources */,
 				087148B7232BEB5400D6BE1A /* Feed.strings in Resources */,
+				D64D7EF925096D3900378982 /* Shared.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -941,6 +947,16 @@
 				D64D7EE0250849E500378982 /* pt-BR */,
 			);
 			name = ImageComments.strings;
+			sourceTree = "<group>";
+		};
+		D64D7EFB25096D3900378982 /* Shared.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D64D7EFA25096D3900378982 /* en */,
+				D64D7EFC25096D3D00378982 /* el */,
+				D64D7EFD25096D3E00378982 /* pt-BR */,
+			);
+			name = Shared.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
