@@ -76,11 +76,11 @@ class PresenterTests: XCTestCase {
 
         private(set) var messages = Set<Message>()
 
-        func display(_ viewModel: FeedErrorViewModel) {
+        func display(_ viewModel: ErrorViewModel) {
             messages.insert(.display(errorMessage: viewModel.message))
         }
 
-        func display(_ viewModel: FeedLoadingViewModel) {
+        func display(_ viewModel: LoadingViewModel) {
             messages.insert(.display(isLoading: viewModel.isLoading))
         }
 

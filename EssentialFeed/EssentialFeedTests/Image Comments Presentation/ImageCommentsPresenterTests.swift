@@ -71,7 +71,7 @@ class ImageCommentsPresenterTests: XCTestCase {
         return value
     }
 
-    private class ViewSpy: ImageCommentsView, ImageCommentsLoadingView, ImageCommentsErrorView {
+    private class ViewSpy: ImageCommentsView, LoadingView, ErrorView {
         enum Message: Hashable {
             case display(errorMessage: String?)
             case display(isLoading: Bool)
@@ -80,11 +80,11 @@ class ImageCommentsPresenterTests: XCTestCase {
 
         private(set) var messages = Set<Message>()
 
-        func display(_ viewModel: ImageCommentsErrorViewModel) {
+        func display(_ viewModel: ErrorViewModel) {
             messages.insert(.display(errorMessage: viewModel.message))
         }
 
-        func display(_ viewModel: ImageCommentsLoadingViewModel) {
+        func display(_ viewModel: LoadingViewModel) {
             messages.insert(.display(isLoading: viewModel.isLoading))
         }
 

@@ -5,11 +5,11 @@
 import Foundation
 
 public protocol LoadingView {
-    func display(_ viewModel: FeedLoadingViewModel)
+    func display(_ viewModel: LoadingViewModel)
 }
 
 public protocol ErrorView {
-    func display(_ viewModel: FeedErrorViewModel)
+    func display(_ viewModel: ErrorViewModel)
 }
 
 public final class Presenter {
@@ -39,16 +39,16 @@ public final class Presenter {
 
     public func didStartLoadingFeed() {
         errorView.display(.noError)
-        loadingView.display(FeedLoadingViewModel(isLoading: true))
+        loadingView.display(LoadingViewModel(isLoading: true))
     }
 
     public func didFinishLoadingFeed(with feed: [FeedImage]) {
         feedView.display(FeedViewModel(feed: feed))
-        loadingView.display(FeedLoadingViewModel(isLoading: false))
+        loadingView.display(LoadingViewModel(isLoading: false))
     }
 
     public func didFinishLoadingFeed(with error: Error) {
         errorView.display(.error(message: feedLoadError))
-        loadingView.display(FeedLoadingViewModel(isLoading: false))
+        loadingView.display(LoadingViewModel(isLoading: false))
     }
 }
