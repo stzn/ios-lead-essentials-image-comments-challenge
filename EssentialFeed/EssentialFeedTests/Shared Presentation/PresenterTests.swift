@@ -16,7 +16,7 @@ class PresenterTests: XCTestCase {
     func test_didStartLoadingFeed_displaysNoErrorMessageAndStartsLoading() {
         let (sut, view) = makeSUT()
 
-        sut.didStartLoadingFeed()
+        sut.didStartLoadingView()
 
         XCTAssertEqual(view.messages, [
             .display(errorMessage: .none),
@@ -26,12 +26,12 @@ class PresenterTests: XCTestCase {
 
     func test_didFinishLoadingFeed_displaysFeedAndStopsLoading() {
         let (sut, view) = makeSUT()
-        let feed = uniqueImageFeed().models
+        let comments = ["any"]
 
-        sut.didFinishLoadingFeed(with: feed)
+        sut.didFinishLoadingView(with: comments)
 
         XCTAssertEqual(view.messages, [
-            .display(feed: feed),
+            .display(content: comments),
             .display(isLoading: false)
         ])
     }
@@ -39,7 +39,7 @@ class PresenterTests: XCTestCase {
     func test_didFinishLoadingFeedWithError_displaysLocalizedErrorMessageAndStopsLoading() {
         let (sut, view) = makeSUT()
 
-        sut.didFinishLoadingFeed(with: anyNSError())
+        sut.didFinishLoadingView(with: anyNSError())
 
         XCTAssertEqual(view.messages, [
             .display(errorMessage: localized("VIEW_CONNECTION_ERROR")),
@@ -49,9 +49,9 @@ class PresenterTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: Presenter, view: ViewSpy) {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: Presenter<ViewSpy, [String]>, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = Presenter(feedView: view, loadingView: view, errorView: view)
+        let sut = Presenter(view: view, loadingView: view, errorView: view)
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, view)
@@ -59,7 +59,7 @@ class PresenterTests: XCTestCase {
 
     private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
         let table = "Shared"
-        let bundle = Bundle(for: Presenter.self)
+        let bundle = Bundle(for: Presenter<ViewSpy, [String]>.self)
         let value = bundle.localizedString(forKey: key, value: nil, table: table)
         if value == key {
             XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
@@ -67,11 +67,11 @@ class PresenterTests: XCTestCase {
         return value
     }
 
-    private class ViewSpy: FeedView, LoadingView, ErrorView {
+    private class ViewSpy: View, LoadingView, ErrorView {
         enum Message: Hashable {
             case display(errorMessage: String?)
             case display(isLoading: Bool)
-            case display(feed: [FeedImage])
+            case display(content: [String])
         }
 
         private(set) var messages = Set<Message>()
@@ -84,8 +84,8 @@ class PresenterTests: XCTestCase {
             messages.insert(.display(isLoading: viewModel.isLoading))
         }
 
-        func display(_ viewModel: FeedViewModel) {
-            messages.insert(.display(feed: viewModel.feed))
+        func display(_ viewModel: ViewModel<[String]>) {
+            messages.insert(.display(content: viewModel.content))
         }
     }
 
