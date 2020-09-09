@@ -7,10 +7,6 @@ import EssentialFeed
 
 class PresenterTests: XCTestCase {
 
-    func test_title_isLocalized() {
-        XCTAssertEqual(FeedPresenter.title, localized("FEED_VIEW_TITLE"))
-    }
-
     func test_init_doesNotSendMessagesToView() {
         let (_, view) = makeSUT()
 
@@ -46,7 +42,7 @@ class PresenterTests: XCTestCase {
         sut.didFinishLoadingFeed(with: anyNSError())
 
         XCTAssertEqual(view.messages, [
-            .display(errorMessage: localized("FEED_VIEW_CONNECTION_ERROR")),
+            .display(errorMessage: localized("VIEW_CONNECTION_ERROR")),
             .display(isLoading: false)
         ])
     }
@@ -62,8 +58,8 @@ class PresenterTests: XCTestCase {
     }
 
     private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
-        let table = "Feed"
-        let bundle = Bundle(for: FeedPresenter.self)
+        let table = "Shared"
+        let bundle = Bundle(for: Presenter.self)
         let value = bundle.localizedString(forKey: key, value: nil, table: table)
         if value == key {
             XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
@@ -71,7 +67,7 @@ class PresenterTests: XCTestCase {
         return value
     }
 
-    private class ViewSpy: FeedView, FeedLoadingView, FeedErrorView {
+    private class ViewSpy: FeedView, LoadingView, ErrorView {
         enum Message: Hashable {
             case display(errorMessage: String?)
             case display(isLoading: Bool)
