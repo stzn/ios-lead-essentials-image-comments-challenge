@@ -7,6 +7,8 @@ import Combine
 import EssentialFeed
 import EssentialFeediOS
 
+typealias FeedPresenter = Presenter<FeedViewAdapter, [FeedImage]>
+
 public final class FeedUIComposer {
 	private init() {}
 	
@@ -21,7 +23,7 @@ public final class FeedUIComposer {
 			title: FeedPresenter.title)
 
 		presentationAdapter.presenter = FeedPresenter(
-			feedView: FeedViewAdapter(
+            view: FeedViewAdapter(
 				controller: feedController,
                 imageLoader: imageLoader),
 			loadingView: WeakRefVirtualProxy(feedController),
