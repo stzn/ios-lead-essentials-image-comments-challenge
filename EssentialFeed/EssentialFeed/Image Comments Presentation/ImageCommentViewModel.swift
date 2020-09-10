@@ -4,9 +4,16 @@
 
 import Foundation
 
-struct ImageCommentViewModel {
-    let id: UUID
-    let message: String
-    let createdAt: String
-    let username: String
+public struct ImageCommentViewModel {
+    public let id: UUID
+    public let message: String
+    public let createdAt: String
+    public let username: String
+
+    public init(id: UUID, message: String, createdAt: String, username: String) {
+        self.id = id
+        self.message = message
+        self.createdAt = createdAt
+        self.username = username
+    }
 }
