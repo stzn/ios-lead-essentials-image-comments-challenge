@@ -4,6 +4,7 @@
 
 import Foundation
 import XCTest
+import EssentialFeed
 
 extension XCTestCase {
     typealias LocalizedBundle = (bundle: Bundle, localization: String)
@@ -43,5 +44,20 @@ extension XCTestCase {
 
             return acc.union(Set(keys))
         }
+    }
+
+    func sharedLocalized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
+        let table = "Shared"
+        let bundle = Bundle(for: Presenter<AnyView, Never>.self)
+        let value = bundle.localizedString(forKey: key, value: nil, table: table)
+        if value == key {
+            XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
+        }
+        return value
+    }
+
+    private class AnyView: View {
+        typealias Content = Never
+        func display(_ model: ViewModel<Never>) {}
     }
 }

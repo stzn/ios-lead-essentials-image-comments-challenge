@@ -7,7 +7,7 @@ import Foundation
 public protocol View {
     associatedtype Content
 
-    func display(_ model: ViewModel<Content>)
+    func display(_ viewModel: ViewModel<Content>)
 }
 
 public protocol LoadingView {
@@ -39,7 +39,7 @@ public final class Presenter<V: View, Content> where Content == V.Content {
     public static var title: String {
         return NSLocalizedString("FEED_VIEW_TITLE",
                                  tableName: "Feed",
-                                 bundle: Bundle(for: FeedPresenter.self),
+                                 bundle: Bundle(for: FeedLocalizedString.self),
                                  comment: "Title for the feed view")
     }
 
