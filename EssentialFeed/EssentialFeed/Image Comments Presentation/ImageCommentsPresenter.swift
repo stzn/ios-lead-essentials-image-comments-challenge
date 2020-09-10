@@ -9,7 +9,7 @@ public protocol ImageCommentsView {
 }
 
 public final class ImageCommentsPresenter {
-    private let feedView: ImageCommentsView
+    private let commentsView: ImageCommentsView
     private let loadingView: LoadingView
     private let errorView: ErrorView
 
@@ -20,8 +20,8 @@ public final class ImageCommentsPresenter {
                                  comment: "Error message displayed when we can't load the image feed from the server")
     }
 
-    public init(feedView: ImageCommentsView, loadingView: LoadingView, errorView: ErrorView) {
-        self.feedView = feedView
+    public init(commentView: ImageCommentsView, loadingView: LoadingView, errorView: ErrorView) {
+        self.commentsView = commentView
         self.loadingView = loadingView
         self.errorView = errorView
     }
@@ -39,7 +39,7 @@ public final class ImageCommentsPresenter {
     }
 
     public func didFinishLoadingImageComments(with comments: [ImageComment]) {
-        feedView.display(ImageCommentsViewModel(comments: comments))
+        commentsView.display(ImageCommentsViewModel(comments: comments))
         loadingView.display(LoadingViewModel(isLoading: false))
     }
 
