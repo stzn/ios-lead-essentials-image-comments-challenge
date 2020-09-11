@@ -8,24 +8,13 @@ import EssentialFeed
 class ImageCommentsPresenterTests: XCTestCase {
 
     func test_title_isLocalized() {
-        XCTAssertEqual(ImageCommentsPresenter.title, localized("FEED_VIEW_TITLE"))
+        XCTAssertEqual(ImageCommentsPresenter.title, localized("VIEW_TITLE"))
     }
 
     func test_init_doesNotSendMessagesToView() {
         let (_, view) = makeSUT()
 
         XCTAssertTrue(view.messages.isEmpty, "Expected no view messages")
-    }
-
-    func test_didStartLoadingImageComments_displaysNoErrorMessageAndStartsLoading() {
-        let (sut, view) = makeSUT()
-
-        sut.didStartLoadingImageComments()
-
-        XCTAssertEqual(view.messages, [
-            .display(errorMessage: .none),
-            .display(isLoading: true)
-        ])
     }
 
     func test_didFinishLoadingImageComments_displaysFeedAndStopsLoading() {
@@ -36,17 +25,6 @@ class ImageCommentsPresenterTests: XCTestCase {
 
         XCTAssertEqual(view.messages, [
             .display(comments: comments),
-            .display(isLoading: false)
-        ])
-    }
-
-    func test_didFinishLoadingImageCommentsWithError_displaysLocalizedErrorMessageAndStopsLoading() {
-        let (sut, view) = makeSUT()
-
-        sut.didFinishLoadingImageComments(with: anyNSError())
-
-        XCTAssertEqual(view.messages, [
-            .display(errorMessage: localized("FEED_VIEW_CONNECTION_ERROR")),
             .display(isLoading: false)
         ])
     }
