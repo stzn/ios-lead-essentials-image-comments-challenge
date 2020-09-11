@@ -14,8 +14,8 @@ class ImageCommentsSnapshotTests: XCTestCase {
 
         sut.display(emptyImageComments())
 
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "IMAGE_COMMENT_FEED_light")
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "IMAGE_COMMENT_FEED_dark")
+        assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "EMPTY_IMAGE_COMMENT_light")
+        assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "EMPTY_IMAGE_COMMENT_dark")
     }
 
     func test_imageCommentsWithContent() {
@@ -58,7 +58,7 @@ class ImageCommentsSnapshotTests: XCTestCase {
         return []
     }
 
-    private func imageCommentsWithContent() -> [ImageCommentStub] {
+    private func imageCommentsWithContent() -> [ImageCommentViewModel] {
         let now = Date()
 
         let moreThanOneHourAgo = now.adding(seconds: -TimeInterval(60*60*1 + 1))
@@ -79,53 +79,47 @@ class ImageCommentsSnapshotTests: XCTestCase {
             from: moreThanOneYearAgo)
 
         return [
-            ImageCommentStub(
+            ImageCommentViewModel(
+                id: UUID(),
                 username: "user a",
-                message: String(repeating: "message", count: 100),
-                createdAt: oneHourAgoString),
-            ImageCommentStub(
+                createdAt: oneHourAgoString,
+                message: String(repeating: "message", count: 100)
+            ),
+            ImageCommentViewModel(
+                id: UUID(),
                 username: "user b",
-                message: "This message is yesterday's",
-                createdAt: yeasterdayString),
-            ImageCommentStub(
+                createdAt: yeasterdayString,
+                message: "This message is yesterday's"
+            ),
+            ImageCommentViewModel(
+                id: UUID(),
                 username: "user c",
-                message: "This message is last week's",
-                createdAt: lastWeekString),
-            ImageCommentStub(
+                createdAt: lastWeekString,
+                message: "This message is last week's"
+            ),
+            ImageCommentViewModel(
+                id: UUID(),
                 username: "user d",
-                message: "This message is last month's",
-                createdAt: lastMonthString),
-            ImageCommentStub(
+                createdAt: lastMonthString,
+                message: "This message is last month's"
+            ),
+            ImageCommentViewModel(
+                id: UUID(),
                 username: "user e",
-                message: "This message is last year's",
-                createdAt: lastYearString),
+                createdAt: lastYearString,
+                message: "This message is last year's"
+            ),
         ]
     }
 }
 
 extension ImageCommentsViewController {
-    fileprivate func display(_ stubs: [ImageCommentStub]) {
-        let cells: [ImageCommentCellController] = stubs.map { stub in
-            let cellController = ImageCommentCellController(delegate: stub)
-            stub.controller = cellController
-            return cellController
+    fileprivate func display(_ viewModels: [ImageCommentViewModel]) {
+        let cells: [ImageCommentCellController] = viewModels.map { viewModel in
+            return ImageCommentCellController(viewModel: viewModel)
         }
 
         self.display(cells)
-    }
-}
-
-private class ImageCommentStub: ImageCommentCellControllerDelegate {
-    let viewModel: ImageCommentViewModel
-    weak var controller: ImageCommentCellController?
-
-    init(username: String, message: String, createdAt: String) {
-        viewModel = ImageCommentViewModel(id: UUID(), message: message,
-                                          createdAt: createdAt, username: username)
-    }
-
-    func didRequestImageComment() {
-        controller?.display(viewModel)
     }
 }
 

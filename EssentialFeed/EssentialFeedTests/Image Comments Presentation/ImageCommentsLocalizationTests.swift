@@ -9,7 +9,7 @@ class ImageCommentsLocalizationTests: XCTestCase {
 
     func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
         let table = "ImageComments"
-        let presentationBundle = Bundle(for: ImageCommentsPresenter.self)
+        let presentationBundle = Bundle(for: ImageCommentsLocalizedString.self)
         let localizationBundles = allLocalizationBundles(in: presentationBundle)
         let localizedStringKeys = allLocalizedStringKeys(in: localizationBundles, table: table)
 

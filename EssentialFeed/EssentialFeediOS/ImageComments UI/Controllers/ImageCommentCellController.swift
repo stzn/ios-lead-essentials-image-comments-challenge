@@ -5,26 +5,18 @@
 import EssentialFeed
 import UIKit
 
-public protocol ImageCommentCellControllerDelegate {
-    func didRequestImageComment()
-}
-
 public final class ImageCommentCellController: ImageCommentView {
-    private let delegate: ImageCommentCellControllerDelegate
     private var cell: ImageCommentCell?
+    private let viewModel: ImageCommentViewModel
 
-    public init(delegate: ImageCommentCellControllerDelegate) {
-        self.delegate = delegate
+    public init(viewModel: ImageCommentViewModel) {
+        self.viewModel = viewModel
     }
 
     func view(in tableView: UITableView) -> UITableViewCell {
         cell = tableView.dequeueReusableCell()
-        delegate.didRequestImageComment()
+        display(viewModel)
         return cell!
-    }
-
-    func preload() {
-        delegate.didRequestImageComment()
     }
 
     func cancelLoad() {

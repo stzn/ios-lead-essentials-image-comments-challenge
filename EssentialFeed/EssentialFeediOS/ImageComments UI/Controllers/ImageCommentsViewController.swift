@@ -9,7 +9,7 @@ public protocol ImageCommentsViewControllerDelegate {
     func didRequestImageCommentsRefresh()
 }
 
-public final class ImageCommentsViewController: UITableViewController, UITableViewDataSourcePrefetching, LoadingView, EssentialFeed.ErrorView {
+public final class ImageCommentsViewController: UITableViewController, LoadingView, EssentialFeed.ErrorView {
     @IBOutlet private(set) public var errorView: ErrorView?
 
     private var loadingControllers = [IndexPath: ImageCommentCellController]()
@@ -18,7 +18,7 @@ public final class ImageCommentsViewController: UITableViewController, UITableVi
         didSet { tableView.reloadData() }
     }
 
-    public var delegate: FeedViewControllerDelegate?
+    public var delegate: ImageCommentsViewControllerDelegate?
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ public final class ImageCommentsViewController: UITableViewController, UITableVi
     }
 
     @IBAction private func refresh() {
-        delegate?.didRequestFeedRefresh()
+        delegate?.didRequestImageCommentsRefresh()
     }
 
     public func display(_ cellControllers: [ImageCommentCellController]) {
@@ -59,16 +59,6 @@ public final class ImageCommentsViewController: UITableViewController, UITableVi
 
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cancelCellControllerLoad(forRowAt: indexPath)
-    }
-
-    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach { indexPath in
-            cellController(forRowAt: indexPath).preload()
-        }
-    }
-
-    public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach(cancelCellControllerLoad)
     }
 
     private func cellController(forRowAt indexPath: IndexPath) -> ImageCommentCellController {
