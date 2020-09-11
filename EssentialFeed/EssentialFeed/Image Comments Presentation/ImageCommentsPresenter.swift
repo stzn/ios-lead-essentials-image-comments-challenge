@@ -22,13 +22,6 @@ public final class ImageCommentsPresenter {
     private let loadingView: LoadingView
     private let errorView: ErrorView
 
-    private var feedLoadError: String {
-        return NSLocalizedString("FEED_VIEW_CONNECTION_ERROR",
-                                 tableName: "ImageComments",
-                                 bundle: Bundle(for: ImageCommentsPresenter.self),
-                                 comment: "Error message displayed when we can't load the image feed from the server")
-    }
-
     public init(commentView: ImageCommentsView, loadingView: LoadingView, errorView: ErrorView) {
         self.commentsView = commentView
         self.loadingView = loadingView
@@ -42,18 +35,8 @@ public final class ImageCommentsPresenter {
                                  comment: "Title for the feed view")
     }
 
-    public func didStartLoadingImageComments() {
-        errorView.display(.noError)
-        loadingView.display(LoadingViewModel(isLoading: true))
-    }
-
     public func didFinishLoadingImageComments(with comments: [ImageComment]) {
         commentsView.display(ImageCommentsViewModel(comments: comments))
-        loadingView.display(LoadingViewModel(isLoading: false))
-    }
-
-    public func didFinishLoadingImageComments(with error: Error) {
-        errorView.display(.error(message: feedLoadError))
         loadingView.display(LoadingViewModel(isLoading: false))
     }
 }
