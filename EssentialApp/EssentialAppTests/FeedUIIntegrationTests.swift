@@ -15,7 +15,7 @@ final class FeedUIIntegrationTests: XCTestCase {
 		
 		sut.loadViewIfNeeded()
 		
-		XCTAssertEqual(sut.title, localized("FEED_VIEW_TITLE"))
+		XCTAssertEqual(sut.title, localized("VIEW_TITLE"))
 	}
 	
 	func test_loadFeedActions_requestFeedFromLoader() {

@@ -37,7 +37,7 @@ public final class Presenter<V: View, Content> where Content == V.Content {
     }
 
     public static var title: String {
-        return NSLocalizedString("FEED_VIEW_TITLE",
+        return NSLocalizedString("VIEW_TITLE",
                                  tableName: "Feed",
                                  bundle: Bundle(for: FeedLocalizedString.self),
                                  comment: "Title for the feed view")

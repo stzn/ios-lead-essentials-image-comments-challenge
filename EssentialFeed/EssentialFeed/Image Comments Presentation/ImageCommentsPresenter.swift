@@ -6,7 +6,7 @@ import Foundation
 
 public final class ImageCommentsLocalizedString {
     public static var title: String {
-        return NSLocalizedString("FEED_VIEW_TITLE",
+        return NSLocalizedString("VIEW_TITLE",
                                  tableName: "ImageComments",
                                  bundle: Bundle(for: Self.self),
                                  comment: "Title for the feed view")
@@ -36,7 +36,7 @@ public final class ImageCommentsPresenter {
     }
 
     public static var title: String {
-        return NSLocalizedString("FEED_VIEW_TITLE",
+        return NSLocalizedString("VIEW_TITLE",
                                  tableName: "ImageComments",
                                  bundle: Bundle(for: ImageCommentsPresenter.self),
                                  comment: "Title for the feed view")
