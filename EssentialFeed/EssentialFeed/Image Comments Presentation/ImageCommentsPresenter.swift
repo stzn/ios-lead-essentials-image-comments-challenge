@@ -4,6 +4,15 @@
 
 import Foundation
 
+public final class ImageCommentsLocalizedString {
+    public static var title: String {
+        return NSLocalizedString("FEED_VIEW_TITLE",
+                                 tableName: "ImageComments",
+                                 bundle: Bundle(for: Self.self),
+                                 comment: "Title for the feed view")
+    }
+}
+
 public protocol ImageCommentsView {
     func display(_ viewModel: ImageCommentsViewModel)
 }
