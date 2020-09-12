@@ -13,6 +13,13 @@ public protocol FeedImageCellControllerDelegate {
 public final class FeedImageCellController: FeedImageView {
 	private let delegate: FeedImageCellControllerDelegate
 	private var cell: FeedImageCell?
+    private var viewModel: FeedImageViewModel<UIImage>?
+    public var id: UUID? {
+        guard let viewModel = viewModel else {
+            return nil
+        }
+        return viewModel.id
+    }
 	
 	public init(delegate: FeedImageCellControllerDelegate) {
 		self.delegate = delegate
@@ -41,9 +48,11 @@ public final class FeedImageCellController: FeedImageView {
 		cell?.feedImageContainer.isShimmering = viewModel.isLoading
 		cell?.feedImageRetryButton.isHidden = !viewModel.shouldRetry
 		cell?.onRetry = delegate.didRequestImage
+        self.viewModel = viewModel
 	}
 	
 	private func releaseCellForReuse() {
 		cell = nil
+        viewModel = nil
 	}
 }

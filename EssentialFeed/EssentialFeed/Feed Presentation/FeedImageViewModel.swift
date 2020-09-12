@@ -2,7 +2,10 @@
 //  Copyright © 2019 Essential Developer. All rights reserved.
 //
 
+import Foundation
+
 public struct FeedImageViewModel<Image> {
+    public let id: UUID
 	public let description: String?
 	public let location: String?
 	public let image: Image?
