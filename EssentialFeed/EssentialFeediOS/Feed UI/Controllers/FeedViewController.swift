@@ -13,6 +13,7 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
 	@IBOutlet private(set) public var errorView: ErrorView?
 
     private var loadingControllers = [IndexPath: FeedImageCellController]()
+    public var didSelect: ((UUID) -> Void)?
     
 	private var tableModel = [FeedImageCellController]() {
 		didSet { tableView.reloadData() }
@@ -81,4 +82,12 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
 		loadingControllers[indexPath]?.cancelLoad()
         loadingControllers[indexPath] = nil
 	}
+
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        guard let id = tableModel[indexPath.row].id else {
+            return
+        }
+        didSelect?(id)
+    }
 }

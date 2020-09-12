@@ -6,7 +6,7 @@ import UIKit
 import EssentialFeed
 
 public protocol ImageCommentsViewControllerDelegate {
-    func didRequestImageCommentsRefresh()
+    func didRequestImageCommentsRefresh(feedId: UUID)
 }
 
 public final class ImageCommentsViewController: UITableViewController, LoadingView, EssentialFeed.ErrorView {
@@ -20,6 +20,16 @@ public final class ImageCommentsViewController: UITableViewController, LoadingVi
 
     public var delegate: ImageCommentsViewControllerDelegate?
 
+    private let feedId: UUID
+    public init?(coder: NSCoder, feedId: UUID) {
+        self.feedId = feedId
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,7 +43,7 @@ public final class ImageCommentsViewController: UITableViewController, LoadingVi
     }
 
     @IBAction private func refresh() {
-        delegate?.didRequestImageCommentsRefresh()
+        delegate?.didRequestImageCommentsRefresh(feedId: feedId)
     }
 
     public func display(_ cellControllers: [ImageCommentCellController]) {

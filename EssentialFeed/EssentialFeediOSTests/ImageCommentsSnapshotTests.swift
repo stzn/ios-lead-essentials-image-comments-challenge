@@ -47,7 +47,9 @@ class ImageCommentsSnapshotTests: XCTestCase {
         let bundle = Bundle(for: ImageCommentsViewController.self)
         let storyboard = UIStoryboard(name: "ImageComments", bundle: bundle)
         let controller =
-            storyboard.instantiateInitialViewController() as! ImageCommentsViewController
+            storyboard.instantiateInitialViewController { coder in
+                ImageCommentsViewController(coder: coder, feedId: UUID())
+        }!
         controller.loadViewIfNeeded()
         controller.tableView.showsVerticalScrollIndicator = false
         controller.tableView.showsHorizontalScrollIndicator = false
