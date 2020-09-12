@@ -2,98 +2,108 @@
 //  Copyright © 2019 Essential Developer. All rights reserved.
 //
 
-import UIKit
-import CoreData
 import Combine
+import CoreData
 import EssentialFeed
+import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-	var window: UIWindow?
-	
-	private lazy var httpClient: HTTPClient = {
-		URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-	}()
-	
-	private lazy var store: FeedStore & FeedImageDataStore = {
-		try! CoreDataFeedStore(
-			storeURL: NSPersistentContainer
-				.defaultDirectoryURL()
-				.appendingPathComponent("feed-store.sqlite"))
-	}()
+  var window: UIWindow?
 
-	private lazy var localFeedLoader: LocalFeedLoader = {
-		LocalFeedLoader(store: store, currentDate: Date.init)
-	}()
+  private lazy var httpClient: HTTPClient = {
+    URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+  }()
 
-	convenience init(httpClient: HTTPClient, store: FeedStore & FeedImageDataStore) {
-		self.init()
-		self.httpClient = httpClient
-		self.store = store
-	}
-	
-	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-		guard let scene = (scene as? UIWindowScene) else { return }
-	
-        window = UIWindow(windowScene: scene)
-		configureWindow()
-	}
-	
-	func configureWindow() {
-        let feedViewController = FeedUIComposer.feedComposedWith(
-            feedLoader: makeRemoteFeedLoaderWithLocalFallback,
-            imageLoader: makeLocalImageLoaderWithRemoteFallback)
+  private lazy var store: FeedStore & FeedImageDataStore = {
+    try! CoreDataFeedStore(
+      storeURL:
+        NSPersistentContainer
+        .defaultDirectoryURL()
+        .appendingPathComponent("feed-store.sqlite"))
+  }()
 
-        let navigationController = UINavigationController(
-            rootViewController: feedViewController)
+  private lazy var localFeedLoader: LocalFeedLoader = {
+    LocalFeedLoader(store: store, currentDate: Date.init)
+  }()
 
-		window?.rootViewController = navigationController
+  convenience init(httpClient: HTTPClient, store: FeedStore & FeedImageDataStore) {
+    self.init()
+    self.httpClient = httpClient
+    self.store = store
+  }
 
-        feedViewController.didSelect = { [navigationController, feedViewController] id in
-            let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
-                feedId: id,
-                imageCommentsLoader: self.makeRemoteImageCommentsLoader)
+  func scene(
+    _ scene: UIScene, willConnectTo session: UISceneSession,
+    options connectionOptions: UIScene.ConnectionOptions
+  ) {
+    guard let scene = (scene as? UIWindowScene) else { return }
 
-            feedViewController.navigationItem.backBarButtonItem
-                = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    window = UIWindow(windowScene: scene)
+    configureWindow()
+  }
 
-            navigationController.pushViewController(commentsViewController, animated: true)
-        }
-        
-        window?.makeKeyAndVisible()
-	}
-	
-	func sceneWillResignActive(_ scene: UIScene) {
-		localFeedLoader.validateCache { _ in }
-	}
-    
-    private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedImage], Swift.Error> {
-        let remoteURL = URL(string: "http://image-comments-challenge.essentialdeveloper.com/feed")!
+  func configureWindow() {
+    let feedViewController = FeedUIComposer.feedComposedWith(
+      feedLoader: makeRemoteFeedLoaderWithLocalFallback,
+      imageLoader: makeLocalImageLoaderWithRemoteFallback)
 
-        return httpClient
-            .getPublisher(from: remoteURL)
-            .tryMap(FeedImagesMapper.map)
-            .caching(to: localFeedLoader)
-            .fallback(to: localFeedLoader.loadPublisher)
-    }
-    
-    private func makeLocalImageLoaderWithRemoteFallback(url: URL) -> AnyPublisher<Data, Swift.Error> {
-        let localImageLoader = LocalFeedImageDataLoader(store: store)
+    let navigationController = UINavigationController(
+      rootViewController: feedViewController)
 
-        return localImageLoader
-            .loadImageDataPublisher(from: url)
-            .fallback(to: { [self] in
-                self.httpClient
-                    .getPublisher(from: url)
-                    .tryMap(FeedImageDataMapper.map)
-                    .caching(to: localImageLoader, using: url)
-            })
+    window?.rootViewController = navigationController
+
+    feedViewController.didSelect = { [navigationController, feedViewController] id in
+      let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
+        feedId: id,
+        imageCommentsLoader: self.makeRemoteImageCommentsLoader)
+
+      feedViewController.navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "", style: .plain, target: nil, action: nil)
+
+      navigationController.pushViewController(commentsViewController, animated: true)
     }
 
-    private func makeRemoteImageCommentsLoader(_ feedId: UUID) -> AnyPublisher<[ImageComment], Swift.Error> {
-        let remoteURL = URL(string: "http://image-comments-challenge.essentialdeveloper.com/image/\(feedId)/comments")!
-        return httpClient
-            .getPublisher(from: remoteURL)
-            .tryMap(ImageCommentsMapper.map)
-            .eraseToAnyPublisher()
-    }
+    window?.makeKeyAndVisible()
+  }
+
+  func sceneWillResignActive(_ scene: UIScene) {
+    localFeedLoader.validateCache { _ in }
+  }
+
+  private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedImage], Swift.Error> {
+    let remoteURL = URL(string: "http://image-comments-challenge.essentialdeveloper.com/feed")!
+
+    return
+      httpClient
+      .getPublisher(from: remoteURL)
+      .tryMap(FeedImagesMapper.map)
+      .caching(to: localFeedLoader)
+      .fallback(to: localFeedLoader.loadPublisher)
+  }
+
+  private func makeLocalImageLoaderWithRemoteFallback(url: URL) -> AnyPublisher<Data, Swift.Error> {
+    let localImageLoader = LocalFeedImageDataLoader(store: store)
+
+    return
+      localImageLoader
+      .loadImageDataPublisher(from: url)
+      .fallback(to: { [self] in
+        self.httpClient
+          .getPublisher(from: url)
+          .tryMap(FeedImageDataMapper.map)
+          .caching(to: localImageLoader, using: url)
+      })
+  }
+
+  private func makeRemoteImageCommentsLoader(_ feedId: UUID) -> AnyPublisher<
+    [ImageComment], Swift.Error
+  > {
+    let remoteURL = URL(
+      string: "http://image-comments-challenge.essentialdeveloper.com/image/\(feedId)/comments")!
+    return
+      httpClient
+      .getPublisher(from: remoteURL)
+      .tryMap(ImageCommentsMapper.map)
+      .eraseToAnyPublisher()
+  }
 }

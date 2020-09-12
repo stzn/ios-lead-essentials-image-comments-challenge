@@ -5,5 +5,5 @@
 import Foundation
 
 public protocol ImageCommentView {
-    func display(_ model: ImageCommentViewModel)
+  func display(_ model: ImageCommentViewModel)
 }

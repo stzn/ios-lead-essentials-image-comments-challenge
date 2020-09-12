@@ -2,37 +2,37 @@
 //  Copyright © 2019 Essential Developer. All rights reserved.
 //
 
-import UIKit
 import EssentialFeed
+import UIKit
 
 final class WeakRefVirtualProxy<T: AnyObject> {
-	private weak var object: T?
-	
-	init(_ object: T) {
-		self.object = object
-	}
+  private weak var object: T?
+
+  init(_ object: T) {
+    self.object = object
+  }
 }
 
 extension WeakRefVirtualProxy: ErrorView where T: ErrorView {
-	func display(_ viewModel: ErrorViewModel) {
-		object?.display(viewModel)
-	}
+  func display(_ viewModel: ErrorViewModel) {
+    object?.display(viewModel)
+  }
 }
 
 extension WeakRefVirtualProxy: LoadingView where T: LoadingView {
-	func display(_ viewModel: LoadingViewModel) {
-		object?.display(viewModel)
-	}
+  func display(_ viewModel: LoadingViewModel) {
+    object?.display(viewModel)
+  }
 }
 
 extension WeakRefVirtualProxy: FeedImageView where T: FeedImageView, T.Image == UIImage {
-	func display(_ model: FeedImageViewModel<UIImage>) {
-		object?.display(model)
-	}
+  func display(_ model: FeedImageViewModel<UIImage>) {
+    object?.display(model)
+  }
 }
 
 extension WeakRefVirtualProxy: ImageCommentView where T: ImageCommentView {
-    func display(_ viewModel: ImageCommentViewModel) {
-        object?.display(viewModel)
-    }
+  func display(_ viewModel: ImageCommentViewModel) {
+    object?.display(viewModel)
+  }
 }

@@ -3,5 +3,5 @@
 //
 
 public struct ViewModel<Content> {
-    public let content: Content
+  public let content: Content
 }
