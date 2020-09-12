@@ -44,7 +44,7 @@ public final class ImageCommentsUIComposer {
                 fatalError()
         }
         viewController.delegate = delegate
-        viewController.title = ImageCommentsPresenter.title
+        viewController.title = ImageCommentsLocalizedString.title
         return viewController
     }
 }
