@@ -22,11 +22,8 @@ final class ImageCommentsViewAdapter: View {
         controller?.display(
             viewModel.content.map { model in
                 let view = ImageCommentCellController(
-                    viewModel: ImageCommentViewModel(
-                        id: model.id,
-                        username: model.username,
-                        createdAt: dateFormatter(model.createdAt),
-                        message: model.message))
+                    viewModel: ImageCommentsPresenter.map(model, formatter: dateFormatter)
+                )
                 return view
             })
     }

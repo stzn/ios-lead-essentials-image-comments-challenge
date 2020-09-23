@@ -10,7 +10,7 @@ import EssentialFeediOS
 final class ImageCommentsLoaderPresentationAdapter: ImageCommentsViewControllerDelegate {
     private let imageCommentsLoader: (UUID) -> AnyPublisher<[ImageComment], Swift.Error>
     private var cancellable: Cancellable?
-    var presenter: ImageCommentsPresenter?
+    var presenter: Presenter<ImageCommentsViewAdapter, [ImageComment]>?
 
     init(imageCommentsLoader: @escaping (UUID) -> AnyPublisher<[ImageComment], Swift.Error>) {
         self.imageCommentsLoader = imageCommentsLoader

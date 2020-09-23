@@ -5,11 +5,11 @@
 import XCTest
 import EssentialFeed
 
-class ImageCommentsLocalizationTests: XCTestCase {
+class ImageCommentsPresenterTests: XCTestCase {
 
     func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
         let table = "ImageComments"
-        let presentationBundle = Bundle(for: ImageCommentsLocalizedString.self)
+        let presentationBundle = Bundle(for: ImageCommentsPresenter.self)
         let localizationBundles = allLocalizationBundles(in: presentationBundle)
         let localizedStringKeys = allLocalizedStringKeys(in: localizationBundles, table: table)
 

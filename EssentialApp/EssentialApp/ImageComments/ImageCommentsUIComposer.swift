@@ -7,8 +7,6 @@ import Combine
 import EssentialFeed
 import EssentialFeediOS
 
-typealias ImageCommentsPresenter = Presenter<ImageCommentsViewAdapter, [ImageComment]>
-
 public final class ImageCommentsUIComposer {
     private init() {}
 
@@ -21,7 +19,7 @@ public final class ImageCommentsUIComposer {
         let imageCommentsController = makeImageCommentsViewController(
             feedId: feedId, delegate: presentationAdapter)
 
-        presentationAdapter.presenter = Presenter(
+        presentationAdapter.presenter = Presenter<ImageCommentsViewAdapter, [ImageComment]>(
             view: ImageCommentsViewAdapter(
                 controller: imageCommentsController,
                 dateFormatter: { ImageCommentCreatedAtDateFormatter.format(from: $0) }),
@@ -44,7 +42,7 @@ public final class ImageCommentsUIComposer {
             fatalError()
         }
         viewController.delegate = delegate
-        viewController.title = ImageCommentsLocalizedString.title
+        viewController.title = ImageCommentsPresenter.title
         return viewController
     }
 }
