@@ -36,13 +36,6 @@ public final class Presenter<V: View, Content> where Content == V.Content {
         self.errorView = errorView
     }
 
-    public static var title: String {
-        return NSLocalizedString("VIEW_TITLE",
-                                 tableName: "Feed",
-                                 bundle: Bundle(for: FeedLocalizedString.self),
-                                 comment: "Title for the feed view")
-    }
-
     public func didStartLoadingView() {
         errorView.display(.noError)
         loadingView.display(LoadingViewModel(isLoading: true))
