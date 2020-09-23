@@ -98,7 +98,7 @@ class LoadFeedImageDataFromCacheUseCaseTests: XCTestCase {
         XCTFail("Expected no no invocations", file: file, line: line)
     }
 
-    private func expect(_ sut: LocalFeedImageDataLoader, toCompleteWith expectedResult: FeedImageDataLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(_ sut: LocalFeedImageDataLoader, toCompleteWith expectedResult: Result<Data, Error>, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
 
         _ = sut.loadImageData(from: anyURL()) { receivedResult in
