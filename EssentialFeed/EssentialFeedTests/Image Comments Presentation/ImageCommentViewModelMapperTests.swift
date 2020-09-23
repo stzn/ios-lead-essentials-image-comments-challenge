@@ -1,4 +1,4 @@
-//	
+//
 // Copyright © 2020 Essential Developer. All rights reserved.
 //
 
@@ -19,7 +19,7 @@ class ImageCommentCreatedAtDateFormatterTests: XCTestCase {
             (createdAt: moreThanOneDayAgo, "1 day ago"),
             (createdAt: moreThanOneWeekAgo, "1 week ago"),
             (createdAt: moreThanOneMonthAgo, "1 month ago"),
-            (createdAt: moreThanOneYearAgo, "1 year ago"),
+            (createdAt: moreThanOneYearAgo, "1 year ago")
         ]
 
         samples.forEach { (date, expectedDateString) in

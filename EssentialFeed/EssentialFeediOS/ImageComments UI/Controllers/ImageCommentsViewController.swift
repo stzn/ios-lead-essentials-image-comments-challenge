@@ -1,4 +1,4 @@
-//	
+//
 // Copyright © 2020 Essential Developer. All rights reserved.
 //
 
@@ -29,7 +29,7 @@ public final class ImageCommentsViewController: UITableViewController, LoadingVi
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()

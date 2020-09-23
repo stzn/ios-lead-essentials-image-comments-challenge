@@ -3,5 +3,5 @@
 //
 
 public struct FeedViewModel {
-	public let feed: [FeedImage]
+    public let feed: [FeedImage]
 }

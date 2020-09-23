@@ -1,4 +1,4 @@
-//	
+//
 // Copyright © 2020 Essential Developer. All rights reserved.
 //
 
@@ -31,6 +31,6 @@ final class ImageCommentsLoaderPresentationAdapter: ImageCommentsViewControllerD
                     }
                 }, receiveValue: { [weak self] comments in
                     self?.presenter?.didFinishLoadingView(with: comments)
-            })
+                })
     }
 }

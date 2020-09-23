@@ -10,13 +10,13 @@ import EssentialFeediOS
 final class FeedViewAdapter: View {
     typealias Content = [FeedImage]
 
-	private weak var controller: FeedViewController?
-	private let imageLoader: (URL) -> AnyPublisher<Data, Swift.Error>
-	
-	init(controller: FeedViewController, imageLoader: @escaping (URL) -> AnyPublisher<Data, Swift.Error>) {
-		self.controller = controller
-		self.imageLoader = imageLoader
-	}
+    private weak var controller: FeedViewController?
+    private let imageLoader: (URL) -> AnyPublisher<Data, Swift.Error>
+
+    init(controller: FeedViewController, imageLoader: @escaping (URL) -> AnyPublisher<Data, Swift.Error>) {
+        self.controller = controller
+        self.imageLoader = imageLoader
+    }
 
     func display(_ viewModel: ViewModel<[FeedImage]>) {
         controller?.display(viewModel.content.map { model in

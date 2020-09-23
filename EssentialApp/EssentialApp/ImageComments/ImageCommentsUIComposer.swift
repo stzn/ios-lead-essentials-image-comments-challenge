@@ -1,4 +1,4 @@
-//	
+//
 // Copyright © 2020 Essential Developer. All rights reserved.
 //
 
@@ -38,10 +38,10 @@ public final class ImageCommentsUIComposer {
         let storyboard = UIStoryboard(name: "ImageComments", bundle: bundle)
 
         guard let viewController =
-            (storyboard.instantiateInitialViewController { coder in
-                ImageCommentsViewController(coder: coder, feedId: feedId)
-            }) else {
-                fatalError()
+                (storyboard.instantiateInitialViewController { coder in
+                    ImageCommentsViewController(coder: coder, feedId: feedId)
+                }) else {
+            fatalError()
         }
         viewController.delegate = delegate
         viewController.title = ImageCommentsLocalizedString.title

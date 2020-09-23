@@ -5,5 +5,5 @@
 import Foundation
 
 public protocol FeedImageDataLoaderTask {
-	func cancel()
+    func cancel()
 }

@@ -1,4 +1,4 @@
-//	
+//
 // Copyright © 2020 Essential Developer. All rights reserved.
 //
 import XCTest
@@ -103,7 +103,6 @@ final class ImageCommentsUIIntegrationTests: XCTestCase {
         sut.simulateUserInitiatedImageCommentsReload()
         XCTAssertEqual(sut.errorMessage, nil)
     }
-
 
     func test_loadImageCommentsCompletion_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()

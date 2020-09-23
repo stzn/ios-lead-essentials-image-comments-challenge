@@ -1,10 +1,10 @@
-//	
+//
 // Copyright © 2020 Essential Developer. All rights reserved.
 //
 
 import Foundation
 
-public struct ImageComment: Equatable , Hashable {
+public struct ImageComment: Equatable, Hashable {
     public let id: UUID
     public let message: String
     public let createdAt: Date

@@ -49,7 +49,7 @@ class ImageCommentsSnapshotTests: XCTestCase {
         let controller =
             storyboard.instantiateInitialViewController { coder in
                 ImageCommentsViewController(coder: coder, feedId: UUID())
-        }!
+            }!
         controller.loadViewIfNeeded()
         controller.tableView.showsVerticalScrollIndicator = false
         controller.tableView.showsHorizontalScrollIndicator = false
@@ -110,7 +110,7 @@ class ImageCommentsSnapshotTests: XCTestCase {
                 username: "user e",
                 createdAt: lastYearString,
                 message: "This message is last year's"
-            ),
+            )
         ]
     }
 }

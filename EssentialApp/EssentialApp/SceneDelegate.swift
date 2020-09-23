@@ -8,37 +8,37 @@ import Combine
 import EssentialFeed
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-	var window: UIWindow?
-	
-	private lazy var httpClient: HTTPClient = {
-		URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-	}()
-	
-	private lazy var store: FeedStore & FeedImageDataStore = {
-		try! CoreDataFeedStore(
-			storeURL: NSPersistentContainer
-				.defaultDirectoryURL()
-				.appendingPathComponent("feed-store.sqlite"))
-	}()
+    var window: UIWindow?
 
-	private lazy var localFeedLoader: LocalFeedLoader = {
-		LocalFeedLoader(store: store, currentDate: Date.init)
-	}()
+    private lazy var httpClient: HTTPClient = {
+        URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    }()
 
-	convenience init(httpClient: HTTPClient, store: FeedStore & FeedImageDataStore) {
-		self.init()
-		self.httpClient = httpClient
-		self.store = store
-	}
-	
-	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-		guard let scene = (scene as? UIWindowScene) else { return }
-	
+    private lazy var store: FeedStore & FeedImageDataStore = {
+        try! CoreDataFeedStore(
+            storeURL: NSPersistentContainer
+                .defaultDirectoryURL()
+                .appendingPathComponent("feed-store.sqlite"))
+    }()
+
+    private lazy var localFeedLoader: LocalFeedLoader = {
+        LocalFeedLoader(store: store, currentDate: Date.init)
+    }()
+
+    convenience init(httpClient: HTTPClient, store: FeedStore & FeedImageDataStore) {
+        self.init()
+        self.httpClient = httpClient
+        self.store = store
+    }
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let scene = (scene as? UIWindowScene) else { return }
+
         window = UIWindow(windowScene: scene)
-		configureWindow()
-	}
-	
-	func configureWindow() {
+        configureWindow()
+    }
+
+    func configureWindow() {
         let feedViewController = FeedUIComposer.feedComposedWith(
             feedLoader: makeRemoteFeedLoaderWithLocalFallback,
             imageLoader: makeLocalImageLoaderWithRemoteFallback)
@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController(
             rootViewController: feedViewController)
 
-		window?.rootViewController = navigationController
+        window?.rootViewController = navigationController
 
         feedViewController.didSelect = { [navigationController, feedViewController] id in
             let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
@@ -58,14 +58,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             navigationController.pushViewController(commentsViewController, animated: true)
         }
-        
+
         window?.makeKeyAndVisible()
-	}
-	
-	func sceneWillResignActive(_ scene: UIScene) {
-		localFeedLoader.validateCache { _ in }
-	}
-    
+    }
+
+    func sceneWillResignActive(_ scene: UIScene) {
+        localFeedLoader.validateCache { _ in }
+    }
+
     private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedImage], Swift.Error> {
         let remoteURL = URL(string: "http://image-comments-challenge.essentialdeveloper.com/feed")!
 
@@ -75,7 +75,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .caching(to: localFeedLoader)
             .fallback(to: localFeedLoader.loadPublisher)
     }
-    
+
     private func makeLocalImageLoaderWithRemoteFallback(url: URL) -> AnyPublisher<Data, Swift.Error> {
         let localImageLoader = LocalFeedImageDataLoader(store: store)
 

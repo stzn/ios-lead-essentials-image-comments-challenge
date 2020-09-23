@@ -10,8 +10,7 @@ extension XCTestCase {
     typealias LocalizedBundle = (bundle: Bundle, localization: String)
 
     func allLocalizationBundles(in bundle: Bundle, file: StaticString = #file, line: UInt = #line)
-        -> [LocalizedBundle]
-    {
+    -> [LocalizedBundle] {
         return bundle.localizations.compactMap { localization in
             guard
                 let path = bundle.path(forResource: localization, ofType: "lproj"),
