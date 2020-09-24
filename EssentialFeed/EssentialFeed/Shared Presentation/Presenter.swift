@@ -18,7 +18,7 @@ public protocol ErrorView {
     func display(_ viewModel: ErrorViewModel)
 }
 
-public final class Presenter<View: ResourceView, ResourceViewModel> where View.ResourceViewModel == ResourceViewModel {
+public final class Presenter<ResourceViewModel, View: ResourceView> where View.ResourceViewModel == ResourceViewModel {
     private let view: View
     private let loadingView: LoadingView
     private let errorView: ErrorView

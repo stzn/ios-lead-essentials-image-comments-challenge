@@ -49,7 +49,7 @@ class PresenterTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: Presenter<ViewSpy, [String]>, view: ViewSpy) {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: Presenter<[String], ViewSpy>, view: ViewSpy) {
         let view = ViewSpy()
         let sut = Presenter(view: view, loadingView: view, errorView: view)
         trackForMemoryLeaks(view, file: file, line: line)
@@ -59,7 +59,7 @@ class PresenterTests: XCTestCase {
 
     private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
         let table = "Shared"
-        let bundle = Bundle(for: Presenter<ViewSpy, [String]>.self)
+        let bundle = Bundle(for: Presenter< [String], ViewSpy>.self)
         let value = bundle.localizedString(forKey: key, value: nil, table: table)
         if value == key {
             XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)

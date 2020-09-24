@@ -7,7 +7,7 @@ import Combine
 import EssentialFeed
 import EssentialFeediOS
 
-typealias FeedPresenter = Presenter<FeedViewAdapter, [FeedImage]>
+typealias FeedPresenter = Presenter<[FeedImage], FeedViewAdapter>
 
 public final class FeedUIComposer {
     private init() {}

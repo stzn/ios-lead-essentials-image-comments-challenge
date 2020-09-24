@@ -19,7 +19,7 @@ public final class ImageCommentsUIComposer {
         let imageCommentsController = makeImageCommentsViewController(
             feedId: feedId, delegate: presentationAdapter)
 
-        presentationAdapter.presenter = Presenter<ImageCommentsViewAdapter, [ImageComment]>(
+        presentationAdapter.presenter = Presenter<[ImageComment], ImageCommentsViewAdapter>(
             view: ImageCommentsViewAdapter(
                 controller: imageCommentsController,
                 dateFormatter: { ImageCommentCreatedAtDateFormatter.format(from: $0) }),
