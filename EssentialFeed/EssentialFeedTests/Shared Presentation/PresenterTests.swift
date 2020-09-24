@@ -67,7 +67,7 @@ class PresenterTests: XCTestCase {
         return value
     }
 
-    private class ViewSpy: View, LoadingView, ErrorView {
+    private class ViewSpy: ResourceView, LoadingView, ErrorView {
         typealias ResourceViewModel = [String]
         enum Message: Hashable {
             case display(errorMessage: String?)

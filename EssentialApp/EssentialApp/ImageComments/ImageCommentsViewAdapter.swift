@@ -7,7 +7,7 @@ import EssentialFeed
 import EssentialFeediOS
 import UIKit
 
-final class ImageCommentsViewAdapter: View {
+final class ImageCommentsViewAdapter: ResourceView {
     typealias Content = [ImageComment]
 
     private weak var controller: ImageCommentsViewController?

@@ -55,7 +55,7 @@ extension XCTestCase {
         return value
     }
 
-    private class AnyView: View {
+    private class AnyView: ResourceView {
         typealias Content = Never
         func display(_ model: Never) {}
     }

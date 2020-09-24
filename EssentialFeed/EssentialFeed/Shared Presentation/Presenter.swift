@@ -4,7 +4,7 @@
 
 import Foundation
 
-public protocol View {
+public protocol ResourceView {
     associatedtype ResourceViewModel
 
     func display(_ viewModel: ResourceViewModel)
@@ -18,8 +18,8 @@ public protocol ErrorView {
     func display(_ viewModel: ErrorViewModel)
 }
 
-public final class Presenter<V: View, ResourceViewModel> where V.ResourceViewModel == ResourceViewModel {
-    private let view: V
+public final class Presenter<View: ResourceView, ResourceViewModel> where View.ResourceViewModel == ResourceViewModel {
+    private let view: View
     private let loadingView: LoadingView
     private let errorView: ErrorView
 
@@ -30,7 +30,7 @@ public final class Presenter<V: View, ResourceViewModel> where V.ResourceViewMod
                                  comment: "Error message displayed when we can't load the image feed from the server")
     }
 
-    public init(view: V, loadingView: LoadingView, errorView: ErrorView) {
+    public init(view: View, loadingView: LoadingView, errorView: ErrorView) {
         self.view = view
         self.loadingView = loadingView
         self.errorView = errorView

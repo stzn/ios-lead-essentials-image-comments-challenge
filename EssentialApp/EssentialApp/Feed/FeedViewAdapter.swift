@@ -7,7 +7,7 @@ import UIKit
 import EssentialFeed
 import EssentialFeediOS
 
-final class FeedViewAdapter: View {
+final class FeedViewAdapter: ResourceView {
     typealias Content = [FeedImage]
 
     private weak var controller: FeedViewController?
