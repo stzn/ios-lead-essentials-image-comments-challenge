@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		08073B44238D2DFA00A75DC6 /* FeedUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B42238D2DF900A75DC6 /* FeedUIComposer.swift */; };
-		08073B45238D2DFA00A75DC6 /* FeedLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B41238D2DF900A75DC6 /* FeedLoaderPresentationAdapter.swift */; };
 		08073B47238D2DFA00A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B3F238D2DF900A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift */; };
 		08073B48238D2DFA00A75DC6 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B40238D2DF900A75DC6 /* WeakRefVirtualProxy.swift */; };
 		08073B49238D2DFA00A75DC6 /* FeedViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B43238D2DFA00A75DC6 /* FeedViewAdapter.swift */; };
@@ -41,7 +40,6 @@
 		D6393B4B250C13AB001C66BA /* ImageCommentCell+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6393B4A250C13AB001C66BA /* ImageCommentCell+TestHelpers.swift */; };
 		D6393B4D250C13EC001C66BA /* ImageCommentsUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6393B4C250C13EC001C66BA /* ImageCommentsUIComposer.swift */; };
 		D6393B4F250C1416001C66BA /* ImageCommentsViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6393B4E250C1416001C66BA /* ImageCommentsViewAdapter.swift */; };
-		D6393B53250C1485001C66BA /* ImageCommentsLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6393B52250C1485001C66BA /* ImageCommentsLoaderPresentationAdapter.swift */; };
 		D64D7F052509C2C400378982 /* XCTestCase+LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F042509C2C400378982 /* XCTestCase+LocalizedString.swift */; };
 		D64D7F07250ABBCA00378982 /* ImageCommentsUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F06250ABBCA00378982 /* ImageCommentsUIIntegrationTests.swift */; };
 		D64D7F09250ABC3700378982 /* ImageCommentsUIIntegrationTests+LoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F08250ABC3700378982 /* ImageCommentsUIIntegrationTests+LoaderSpy.swift */; };
@@ -79,7 +77,6 @@
 /* Begin PBXFileReference section */
 		08073B3F238D2DF900A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		08073B40238D2DF900A75DC6 /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
-		08073B41238D2DF900A75DC6 /* FeedLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		08073B42238D2DF900A75DC6 /* FeedUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIComposer.swift; sourceTree = "<group>"; };
 		08073B43238D2DFA00A75DC6 /* FeedViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewAdapter.swift; sourceTree = "<group>"; };
 		08073B4A238D2E0E00A75DC6 /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -113,7 +110,6 @@
 		D6393B4A250C13AB001C66BA /* ImageCommentCell+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentCell+TestHelpers.swift"; sourceTree = "<group>"; };
 		D6393B4C250C13EC001C66BA /* ImageCommentsUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsUIComposer.swift; sourceTree = "<group>"; };
 		D6393B4E250C1416001C66BA /* ImageCommentsViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsViewAdapter.swift; sourceTree = "<group>"; };
-		D6393B52250C1485001C66BA /* ImageCommentsLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		D64D7F042509C2C400378982 /* XCTestCase+LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+LocalizedString.swift"; sourceTree = "<group>"; };
 		D64D7F06250ABBCA00378982 /* ImageCommentsUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsUIIntegrationTests.swift; sourceTree = "<group>"; };
 		D64D7F08250ABC3700378982 /* ImageCommentsUIIntegrationTests+LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentsUIIntegrationTests+LoaderSpy.swift"; sourceTree = "<group>"; };
@@ -249,7 +245,6 @@
 			children = (
 				08073B42238D2DF900A75DC6 /* FeedUIComposer.swift */,
 				08073B3F238D2DF900A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift */,
-				08073B41238D2DF900A75DC6 /* FeedLoaderPresentationAdapter.swift */,
 				08073B43238D2DFA00A75DC6 /* FeedViewAdapter.swift */,
 			);
 			path = Feed;
@@ -260,7 +255,6 @@
 			children = (
 				D6393B4C250C13EC001C66BA /* ImageCommentsUIComposer.swift */,
 				D6393B4E250C1416001C66BA /* ImageCommentsViewAdapter.swift */,
-				D6393B52250C1485001C66BA /* ImageCommentsLoaderPresentationAdapter.swift */,
 			);
 			path = ImageComments;
 			sourceTree = "<group>";
@@ -371,11 +365,9 @@
 				0895DA87234B3B950031BB2D /* AppDelegate.swift in Sources */,
 				D6A2ACD3251CAEB1007EFB31 /* LoaderPresentationAdapter.swift in Sources */,
 				D6393B4D250C13EC001C66BA /* ImageCommentsUIComposer.swift in Sources */,
-				08073B45238D2DFA00A75DC6 /* FeedLoaderPresentationAdapter.swift in Sources */,
 				08073B47238D2DFA00A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */,
 				08073B48238D2DFA00A75DC6 /* WeakRefVirtualProxy.swift in Sources */,
 				D6393B4F250C1416001C66BA /* ImageCommentsViewAdapter.swift in Sources */,
-				D6393B53250C1485001C66BA /* ImageCommentsLoaderPresentationAdapter.swift in Sources */,
 				0895DA89234B3B950031BB2D /* SceneDelegate.swift in Sources */,
 				08073B49238D2DFA00A75DC6 /* FeedViewAdapter.swift in Sources */,
 				0835BF6D24850F9800A793D2 /* CombineHelpers.swift in Sources */,
