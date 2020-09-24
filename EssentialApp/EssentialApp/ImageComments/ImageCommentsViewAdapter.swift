@@ -8,8 +8,6 @@ import EssentialFeediOS
 import UIKit
 
 final class ImageCommentsViewAdapter: ResourceView {
-    typealias Content = [ImageComment]
-
     private weak var controller: ImageCommentsViewController?
     private let dateFormatter: (Date) -> String
 
@@ -18,9 +16,9 @@ final class ImageCommentsViewAdapter: ResourceView {
         self.dateFormatter = dateFormatter
     }
 
-    func display(_ viewModel: ViewModel<[ImageComment]>) {
+    func display(_ viewModel: [ImageComment]) {
         controller?.display(
-            viewModel.content.map { model in
+            viewModel.map { model in
                 let view = ImageCommentCellController(
                     viewModel: ImageCommentsPresenter.map(model, formatter: dateFormatter)
                 )

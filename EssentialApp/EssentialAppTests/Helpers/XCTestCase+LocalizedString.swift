@@ -19,6 +19,6 @@ extension XCTestCase {
 
     private class AnyView: ResourceView {
         typealias Content = Never
-        func display(_ model: ViewModel<Never>) {}
+        func display(_ model: Never) {}
     }
 }
