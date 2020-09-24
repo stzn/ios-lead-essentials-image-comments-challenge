@@ -16,13 +16,8 @@ final class ImageCommentsViewAdapter: ResourceView {
         self.dateFormatter = dateFormatter
     }
 
-    func display(_ viewModel: [ImageComment]) {
+    func display(_ viewModel: ImageCommentsViewModel) {
         controller?.display(
-            viewModel.map { model in
-                let view = ImageCommentCellController(
-                    viewModel: ImageCommentsPresenter.map(model, formatter: dateFormatter)
-                )
-                return view
-            })
+            viewModel.comments.map(ImageCommentCellController.init))
     }
 }

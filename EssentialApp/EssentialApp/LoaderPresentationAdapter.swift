@@ -7,22 +7,23 @@
 //
 
 import Combine
+import Foundation
 import EssentialFeed
 import EssentialFeediOS
 
-final class LoaderPresentationAdapter: FeedViewControllerDelegate {
-    private let feedLoader: () -> AnyPublisher<[FeedImage], Swift.Error>
+final class LoaderPresentationAdapter<Resource, View: ResourceView> {
+    private let loader: () -> AnyPublisher<Resource, Swift.Error>
     private var cancellable: Cancellable?
-    var presenter: FeedPresenter?
+    var presenter: Presenter<Resource, View>?
 
-    init(feedLoader: @escaping () -> AnyPublisher<[FeedImage], Swift.Error>) {
-        self.feedLoader = feedLoader
+    init(loader: @escaping () -> AnyPublisher<Resource, Swift.Error>) {
+        self.loader = loader
     }
 
-    func didRequestFeedRefresh() {
+    func loadContent() {
         presenter?.didStartLoadingView()
 
-        cancellable = feedLoader()
+        cancellable = loader()
             .dispatchOnMainQueue()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -32,8 +33,20 @@ final class LoaderPresentationAdapter: FeedViewControllerDelegate {
                     case let .failure(error):
                         self?.presenter?.didFinishLoadingView(with: error)
                     }
-                }, receiveValue: { [weak self] feed in
-                    self?.presenter?.didFinishLoadingView(with: feed)
+                }, receiveValue: { [weak self] resource in
+                    self?.presenter?.didFinishLoadingView(with: resource)
                 })
+    }
+}
+
+extension LoaderPresentationAdapter: FeedViewControllerDelegate {
+    func didRequestFeedRefresh() {
+        loadContent()
+    }
+}
+
+extension LoaderPresentationAdapter: ImageCommentsViewControllerDelegate {
+    func didRequestImageCommentsRefresh(feedId: UUID) {
+        loadContent()
     }
 }

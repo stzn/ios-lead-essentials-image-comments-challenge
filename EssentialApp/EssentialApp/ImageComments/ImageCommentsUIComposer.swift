@@ -10,11 +10,12 @@ import EssentialFeediOS
 public final class ImageCommentsUIComposer {
     private init() {}
 
+    private typealias ImageCommentsPresentationAdapter = LoaderPresentationAdapter<[ImageComment], ImageCommentsViewAdapter>
     public static func imageCommnetsComposedWith(
         feedId: UUID,
-        imageCommentsLoader: @escaping (UUID) -> AnyPublisher<[ImageComment], Swift.Error>
+        imageCommentsLoader: @escaping () -> AnyPublisher<[ImageComment], Swift.Error>
     ) -> ImageCommentsViewController {
-        let presentationAdapter = ImageCommentsLoaderPresentationAdapter(imageCommentsLoader: imageCommentsLoader)
+        let presentationAdapter = ImageCommentsPresentationAdapter(loader: imageCommentsLoader)
 
         let imageCommentsController = makeImageCommentsViewController(
             feedId: feedId, delegate: presentationAdapter)
@@ -24,7 +25,8 @@ public final class ImageCommentsUIComposer {
                 controller: imageCommentsController,
                 dateFormatter: { ImageCommentCreatedAtDateFormatter.format(from: $0) }),
             loadingView: WeakRefVirtualProxy(imageCommentsController),
-            errorView: WeakRefVirtualProxy(imageCommentsController))
+            errorView: WeakRefVirtualProxy(imageCommentsController),
+            mapper: { ImageCommentsPresenter.map($0) })
 
         return imageCommentsController
     }

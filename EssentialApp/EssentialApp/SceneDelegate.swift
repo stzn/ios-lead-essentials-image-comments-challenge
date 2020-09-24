@@ -51,7 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedViewController.didSelect = { [navigationController, feedViewController] id in
             let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
                 feedId: id,
-                imageCommentsLoader: self.makeRemoteImageCommentsLoader)
+                imageCommentsLoader: { self.makeRemoteImageCommentsLoader(id) } )
 
             feedViewController.navigationItem.backBarButtonItem
                 = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

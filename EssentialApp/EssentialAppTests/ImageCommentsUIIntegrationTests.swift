@@ -120,7 +120,8 @@ final class ImageCommentsUIIntegrationTests: XCTestCase {
 
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: ImageCommentsViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = ImageCommentsUIComposer.imageCommnetsComposedWith(feedId: UUID(), imageCommentsLoader: loader.loadPublisher)
+        let id = UUID()
+        let sut = ImageCommentsUIComposer.imageCommnetsComposedWith(feedId: id, imageCommentsLoader: { loader.loadPublisher(id) })
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)

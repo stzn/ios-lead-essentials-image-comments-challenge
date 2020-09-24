@@ -11,4 +11,9 @@ public final class FeedLocalizedString {
                                  bundle: Bundle(for: Self.self),
                                  comment: "Title for the feed view")
     }
+
+    public static func map(_ feed: [FeedImage]) -> FeedViewModel {
+        FeedViewModel(feed: feed)
+    }
+
 }
