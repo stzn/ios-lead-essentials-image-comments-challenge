@@ -5,9 +5,9 @@
 import Foundation
 
 public protocol View {
-    associatedtype Content
+    associatedtype ResourceViewModel
 
-    func display(_ viewModel: ViewModel<Content>)
+    func display(_ viewModel: ResourceViewModel)
 }
 
 public protocol LoadingView {
@@ -18,7 +18,7 @@ public protocol ErrorView {
     func display(_ viewModel: ErrorViewModel)
 }
 
-public final class Presenter<V: View, Content> where Content == V.Content {
+public final class Presenter<V: View, ResourceViewModel> where V.ResourceViewModel == ResourceViewModel {
     private let view: V
     private let loadingView: LoadingView
     private let errorView: ErrorView
@@ -41,8 +41,8 @@ public final class Presenter<V: View, Content> where Content == V.Content {
         loadingView.display(LoadingViewModel(isLoading: true))
     }
 
-    public func didFinishLoadingView(with content: Content) {
-        view.display(ViewModel(content: content))
+    public func didFinishLoadingView(with viewModel: ResourceViewModel) {
+        view.display(viewModel)
         loadingView.display(LoadingViewModel(isLoading: false))
     }
 
