@@ -48,6 +48,7 @@
 		D64D7F0B250ABC7200378982 /* ImageCommentsUIIntegrationTests+Localization.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F0A250ABC7200378982 /* ImageCommentsUIIntegrationTests+Localization.swift.swift */; };
 		D64D7F0D250ABCA600378982 /* ImageCommentsUIIntegrationTests+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F0C250ABCA600378982 /* ImageCommentsUIIntegrationTests+Assertions.swift */; };
 		D64D7F23250C0F6000378982 /* ImageCommentsViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F22250C0F6000378982 /* ImageCommentsViewController+TestHelpers.swift */; };
+		D6A2ACD3251CAEB1007EFB31 /* LoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A2ACD2251CAEB1007EFB31 /* LoaderPresentationAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		D64D7F0A250ABC7200378982 /* ImageCommentsUIIntegrationTests+Localization.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentsUIIntegrationTests+Localization.swift.swift"; sourceTree = "<group>"; };
 		D64D7F0C250ABCA600378982 /* ImageCommentsUIIntegrationTests+Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentsUIIntegrationTests+Assertions.swift"; sourceTree = "<group>"; };
 		D64D7F22250C0F6000378982 /* ImageCommentsViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCommentsViewController+TestHelpers.swift"; sourceTree = "<group>"; };
+		D6A2ACD2251CAEB1007EFB31 /* LoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				D6393B56250C6165001C66BA /* Feed */,
 				D6393B57250C6173001C66BA /* ImageComments */,
 				0895DA91234B3B970031BB2D /* LaunchScreen.storyboard */,
+				D6A2ACD2251CAEB1007EFB31 /* LoaderPresentationAdapter.swift */,
 			);
 			path = EssentialApp;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 			files = (
 				08073B44238D2DFA00A75DC6 /* FeedUIComposer.swift in Sources */,
 				0895DA87234B3B950031BB2D /* AppDelegate.swift in Sources */,
+				D6A2ACD3251CAEB1007EFB31 /* LoaderPresentationAdapter.swift in Sources */,
 				D6393B4D250C13EC001C66BA /* ImageCommentsUIComposer.swift in Sources */,
 				08073B45238D2DFA00A75DC6 /* FeedLoaderPresentationAdapter.swift in Sources */,
 				08073B47238D2DFA00A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */,
