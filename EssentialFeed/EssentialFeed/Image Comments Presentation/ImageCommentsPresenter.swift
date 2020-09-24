@@ -16,12 +16,24 @@ public final class ImageCommentsPresenter {
                                  comment: "Title for the feed view")
     }
 
-    public static func map(_ model: ImageComment, formatter: @escaping (Date) -> String) -> ImageCommentViewModel {
-        ImageCommentViewModel(
-            id: model.id,
-            username: model.username,
-            createdAt: formatter(model.createdAt),
-            message: model.message)
+    public static func map(
+        _ comments: [ImageComment],
+        currentDate: Date = Date(),
+        calendar: Calendar = .current,
+        locale: Locale = .current
+    ) -> ImageCommentsViewModel {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.calendar = calendar
+        formatter.locale = locale
+
+        return ImageCommentsViewModel(comments: comments.map { comment in
+            ImageCommentViewModel(
+                id: comment.id,
+                username: comment.message,
+                createdAt: formatter.localizedString(for: comment.createdAt, relativeTo: currentDate),
+                message: comment.username)
+        })
     }
 }
+
 
