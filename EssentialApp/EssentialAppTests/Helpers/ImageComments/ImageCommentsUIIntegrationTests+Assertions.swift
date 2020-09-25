@@ -34,7 +34,7 @@ extension ImageCommentsUIIntegrationTests {
 
         XCTAssertEqual(
             cell.createdAtText,
-            ImageCommentCreatedAtDateFormatter.format(from: comment.createdAt),
+            ImageCommentsPresenter.map([comment]).comments.first!.createdAt,
             "Expected `createdAt` to be \(comment.createdAt) for comment view at index (\(index))",
             file: file, line: line)
     }

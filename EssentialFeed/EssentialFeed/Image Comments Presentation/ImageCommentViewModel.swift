@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct ImageCommentViewModel {
+public struct ImageCommentViewModel: Equatable {
     public let id: UUID
     public let username: String
     public let createdAt: String

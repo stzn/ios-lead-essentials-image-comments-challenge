@@ -21,9 +21,7 @@ public final class ImageCommentsUIComposer {
             feedId: feedId, delegate: presentationAdapter)
 
         presentationAdapter.presenter = Presenter<[ImageComment], ImageCommentsViewAdapter>(
-            view: ImageCommentsViewAdapter(
-                controller: imageCommentsController,
-                dateFormatter: { ImageCommentCreatedAtDateFormatter.format(from: $0) }),
+            view: ImageCommentsViewAdapter(controller: imageCommentsController),
             loadingView: WeakRefVirtualProxy(imageCommentsController),
             errorView: WeakRefVirtualProxy(imageCommentsController),
             mapper: { ImageCommentsPresenter.map($0) })

@@ -82,8 +82,6 @@
 		D64D7EDC250849DF00378982 /* ImageComments.strings in Resources */ = {isa = PBXBuildFile; fileRef = D64D7EDE250849DF00378982 /* ImageComments.strings */; };
 		D64D7EE225084AF000378982 /* ImageCommentsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EE125084AF000378982 /* ImageCommentsPresenterTests.swift */; };
 		D64D7EE425085BC100378982 /* ImageCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EE325085BC100378982 /* ImageCommentViewModel.swift */; };
-		D64D7EE625085E9E00378982 /* ImageCommentViewModelMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EE525085E9E00378982 /* ImageCommentViewModelMapperTests.swift */; };
-		D64D7EE825087DD900378982 /* ImageCommentCreatedAtDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EE725087DD900378982 /* ImageCommentCreatedAtDateFormatter.swift */; };
 		D64D7EEA2509687D00378982 /* XCTestCase+LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EE92509687D00378982 /* XCTestCase+LocalizedString.swift */; };
 		D64D7EF325096B7600378982 /* PresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EF225096B7600378982 /* PresenterTests.swift */; };
 		D64D7EF625096BC400378982 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EF525096BC400378982 /* Presenter.swift */; };
@@ -203,8 +201,6 @@
 		D64D7EE0250849E500378982 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/ImageComments.strings"; sourceTree = "<group>"; };
 		D64D7EE125084AF000378982 /* ImageCommentsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsPresenterTests.swift; sourceTree = "<group>"; };
 		D64D7EE325085BC100378982 /* ImageCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentViewModel.swift; sourceTree = "<group>"; };
-		D64D7EE525085E9E00378982 /* ImageCommentViewModelMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentViewModelMapperTests.swift; sourceTree = "<group>"; };
-		D64D7EE725087DD900378982 /* ImageCommentCreatedAtDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentCreatedAtDateFormatter.swift; sourceTree = "<group>"; };
 		D64D7EE92509687D00378982 /* XCTestCase+LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+LocalizedString.swift"; sourceTree = "<group>"; };
 		D64D7EF225096B7600378982 /* PresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTests.swift; sourceTree = "<group>"; };
 		D64D7EF525096BC400378982 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
@@ -585,7 +581,6 @@
 			isa = PBXGroup;
 			children = (
 				D64D7EE125084AF000378982 /* ImageCommentsPresenterTests.swift */,
-				D64D7EE525085E9E00378982 /* ImageCommentViewModelMapperTests.swift */,
 				D64D7F1E250AD6A900378982 /* ImageCommentsPresentationTestHelpers.swift */,
 			);
 			path = "Image Comments Presentation";
@@ -598,7 +593,6 @@
 				D64D7ED42508476B00378982 /* ImageCommentsViewModel.swift */,
 				D64D7EDE250849DF00378982 /* ImageComments.strings */,
 				D64D7EE325085BC100378982 /* ImageCommentViewModel.swift */,
-				D64D7EE725087DD900378982 /* ImageCommentCreatedAtDateFormatter.swift */,
 			);
 			path = "Image Comments Presentation";
 			sourceTree = "<group>";
@@ -867,7 +861,6 @@
 				089C40DC22170EC500DE552E /* LocalFeedLoader.swift in Sources */,
 				D63351792502C3BC0094DC33 /* ImageCommentsMapper.swift in Sources */,
 				08C0880C21E4EED600ACFB30 /* HTTPClient.swift in Sources */,
-				D64D7EE825087DD900378982 /* ImageCommentCreatedAtDateFormatter.swift in Sources */,
 				D64D7EE425085BC100378982 /* ImageCommentViewModel.swift in Sources */,
 				080EDF0C21B6DAE800813479 /* FeedImage.swift in Sources */,
 				D64D7ED32508472700378982 /* ImageCommentsPresenter.swift in Sources */,
@@ -913,7 +906,6 @@
 				08604500233E2294005ECD22 /* CoreDataFeedImageDataStoreTests.swift in Sources */,
 				087546942272387900542C32 /* XCTestCase+FailableDeleteFeedStoreSpecs.swift in Sources */,
 				D64D7EF325096B7600378982 /* PresenterTests.swift in Sources */,
-				D64D7EE625085E9E00378982 /* ImageCommentViewModelMapperTests.swift in Sources */,
 				D6EAC92F2501858100A60896 /* ImageCommentsMapperTests.swift in Sources */,
 				08754690227237C900542C32 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift in Sources */,
 				086BE481223270A3004CDC26 /* LoadFeedFromCacheUseCaseTests.swift in Sources */,

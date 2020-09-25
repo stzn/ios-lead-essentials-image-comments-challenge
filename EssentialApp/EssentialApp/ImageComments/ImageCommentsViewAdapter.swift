@@ -9,11 +9,9 @@ import UIKit
 
 final class ImageCommentsViewAdapter: ResourceView {
     private weak var controller: ImageCommentsViewController?
-    private let dateFormatter: (Date) -> String
 
-    init(controller: ImageCommentsViewController, dateFormatter: @escaping (Date) -> String) {
+    init(controller: ImageCommentsViewController) {
         self.controller = controller
-        self.dateFormatter = dateFormatter
     }
 
     func display(_ viewModel: ImageCommentsViewModel) {
