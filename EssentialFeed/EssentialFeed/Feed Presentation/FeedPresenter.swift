@@ -4,7 +4,7 @@
 
 import Foundation
 
-public final class FeedLocalizedString {
+public final class FeedPresenter {
     public static var title: String {
         return NSLocalizedString("VIEW_TITLE",
                                  tableName: "Feed",

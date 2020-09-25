@@ -8,13 +8,13 @@ import EssentialFeed
 class FeedPresenterTests: XCTestCase {
 
     func test_title_isLocalized() {
-        XCTAssertEqual(FeedLocalizedString.title, localized("VIEW_TITLE"))
+        XCTAssertEqual(FeedPresenter.title, localized("VIEW_TITLE"))
     }
 
     func test_map_toViewModel() {
         let feed = uniqueImageFeed().models
 
-        let viewModel = FeedLocalizedString.map(feed)
+        let viewModel = FeedPresenter.map(feed)
 
         XCTAssertEqual(viewModel.feed, feed)
     }
@@ -23,7 +23,7 @@ class FeedPresenterTests: XCTestCase {
 
     private func localized(_ key: String, file: StaticString = #filePath, line: UInt = #line) -> String {
         let table = "Feed"
-        let bundle = Bundle(for: FeedLocalizedString.self)
+        let bundle = Bundle(for: FeedPresenter.self)
         let value = bundle.localizedString(forKey: key, value: nil, table: table)
         if value == key {
             XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
