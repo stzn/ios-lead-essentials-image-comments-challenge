@@ -45,8 +45,21 @@ extension LoaderPresentationAdapter: FeedViewControllerDelegate {
     }
 }
 
+extension LoaderPresentationAdapter: FeedImageCellControllerDelegate {
+    func didRequestImage() {
+        loadContent()
+    }
+
+    func didCancelImageRequest() {
+        cancellable?.cancel()
+        cancellable = nil
+    }
+}
+
 extension LoaderPresentationAdapter: ImageCommentsViewControllerDelegate {
     func didRequestImageCommentsRefresh(feedId: UUID) {
         loadContent()
     }
 }
+
+

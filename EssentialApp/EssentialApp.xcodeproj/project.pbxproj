@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		08073B44238D2DFA00A75DC6 /* FeedUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B42238D2DF900A75DC6 /* FeedUIComposer.swift */; };
-		08073B47238D2DFA00A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B3F238D2DF900A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift */; };
 		08073B48238D2DFA00A75DC6 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B40238D2DF900A75DC6 /* WeakRefVirtualProxy.swift */; };
 		08073B49238D2DFA00A75DC6 /* FeedViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B43238D2DFA00A75DC6 /* FeedViewAdapter.swift */; };
 		08073B53238D2E1000A75DC6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08073B4C238D2E0E00A75DC6 /* UIButton+TestHelpers.swift */; };
@@ -75,7 +74,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08073B3F238D2DF900A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		08073B40238D2DF900A75DC6 /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
 		08073B42238D2DF900A75DC6 /* FeedUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIComposer.swift; sourceTree = "<group>"; };
 		08073B43238D2DFA00A75DC6 /* FeedViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewAdapter.swift; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				08073B42238D2DF900A75DC6 /* FeedUIComposer.swift */,
-				08073B3F238D2DF900A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift */,
 				08073B43238D2DFA00A75DC6 /* FeedViewAdapter.swift */,
 			);
 			path = Feed;
@@ -365,7 +362,6 @@
 				0895DA87234B3B950031BB2D /* AppDelegate.swift in Sources */,
 				D6A2ACD3251CAEB1007EFB31 /* LoaderPresentationAdapter.swift in Sources */,
 				D6393B4D250C13EC001C66BA /* ImageCommentsUIComposer.swift in Sources */,
-				08073B47238D2DFA00A75DC6 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */,
 				08073B48238D2DFA00A75DC6 /* WeakRefVirtualProxy.swift in Sources */,
 				D6393B4F250C1416001C66BA /* ImageCommentsViewAdapter.swift in Sources */,
 				0895DA89234B3B950031BB2D /* SceneDelegate.swift in Sources */,
