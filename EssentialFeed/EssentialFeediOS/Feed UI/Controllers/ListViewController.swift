@@ -16,7 +16,7 @@ public protocol CellController {
     func cancelLoad()
 }
 
-public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching, LoadingView, EssentialFeed.ErrorView {
+public final class ListViewController: UITableViewController, UITableViewDataSourcePrefetching, LoadingView, EssentialFeed.ErrorView {
     @IBOutlet private(set) public var errorView: ErrorView?
 
     private var loadingControllers = [IndexPath: CellController]()
