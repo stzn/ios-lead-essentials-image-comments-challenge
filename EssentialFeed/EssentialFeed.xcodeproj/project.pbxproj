@@ -519,7 +519,6 @@
 		08EFB82A22D4A5F600A46837 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				08BB7EAA22C1425100F8B83C /* ListViewController.swift */,
 				08EFE6BC22D6384100DA417A /* FeedImageCellController.swift */,
 			);
 			path = Controllers;
@@ -572,7 +571,8 @@
 		D6393B58250C64BD001C66BA /* Shared UI */ = {
 			isa = PBXGroup;
 			children = (
-				08A3F2B1232AA1C200127C15 /* ErrorView.swift */,
+				D689650B2525498A00E10145 /* Controllers */,
+				D689650A2525497D00E10145 /* Views */,
 			);
 			path = "Shared UI";
 			sourceTree = "<group>";
@@ -641,6 +641,22 @@
 				D64D7F20250B700300378982 /* ImageComments.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D689650A2525497D00E10145 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08A3F2B1232AA1C200127C15 /* ErrorView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D689650B2525498A00E10145 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				08BB7EAA22C1425100F8B83C /* ListViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D6EAC92D2501852F00A60896 /* Image Comments API */ = {
