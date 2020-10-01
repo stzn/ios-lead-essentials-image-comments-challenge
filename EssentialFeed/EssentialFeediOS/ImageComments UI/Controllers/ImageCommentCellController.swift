@@ -27,8 +27,6 @@ public final class ImageCommentCellController: ImageCommentView, CellController 
         releaseCellForReuse()
     }
 
-    public func preload() {}
-
     public func display(_ viewModel: ImageCommentViewModel) {
         cell?.usernameLabel.text = viewModel.username
         cell?.createdAtLabel.text = viewModel.createdAt
