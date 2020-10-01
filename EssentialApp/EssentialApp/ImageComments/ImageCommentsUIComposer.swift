@@ -32,7 +32,32 @@ public final class ImageCommentsUIComposer {
         let bundle = Bundle(for: ListViewController.self)
         let storyboard = UIStoryboard(name: "ImageComments", bundle: bundle)
         let viewController = storyboard.instantiateInitialViewController() as! ListViewController
+        viewController.configureNavigationBar()
         viewController.title = ImageCommentsPresenter.title
         return viewController
+    }
+}
+
+// MARK: - NavigationBar
+
+private extension ListViewController {
+    func configureNavigationBar() {
+        navigationItem.standardAppearance = navigatioBarAppearance
+        navigationController?.navigationBar.tintColor = .secondaryLabel
+    }
+
+    var navigatioBarAppearance: UINavigationBarAppearance {
+        let standard = UINavigationBarAppearance()
+        standard.configureWithTransparentBackground()
+        standard.backgroundImage = UIImage()
+        standard.shadowImage = UIImage()
+        standard.backButtonAppearance = barButtionItemAppearance
+        return standard
+    }
+
+    var barButtionItemAppearance: UIBarButtonItemAppearance {
+        let button = UIBarButtonItemAppearance(style: .plain)
+        button.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGray]
+        return button
     }
 }
