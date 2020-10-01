@@ -4,7 +4,7 @@
 
 import XCTest
 import EssentialFeed
-import EssentialFeediOS
+@testable import EssentialFeediOS
 @testable import EssentialApp
 
 class FeedAcceptanceTests: XCTestCase {
@@ -54,16 +54,19 @@ class FeedAcceptanceTests: XCTestCase {
 
     func test_didSelectFeedImage_displaysImageCommentsWhenFeedImageSelected() {
         let feed = launch(httpClient: .online(response), store: .empty)
-        feed.simulateFeedImageViewDidSelectRow(at: 0)
+        feed.didSelect = { feedId in
+            guard let navigationController = feed.navigationController else {
+                XCTFail("UINavigationController should be rootViewController")
+                return
+            }
+            navigationController.view.enforceLayoutCycle()
 
-        guard let navigationController = feed.navigationController else {
-            XCTFail("UINavigationController should be rootViewController")
-            return
+            guard let viewController = navigationController.viewControllers.last as? ListViewController else {
+                return
+            }
+            XCTAssertEqual(viewController.tableModel.first?.id, feedId)
         }
-        navigationController.view.enforceLayoutCycle()
-
-        let viewController = navigationController.viewControllers.last
-        XCTAssertTrue(viewController is ListViewController)
+        feed.simulateFeedImageViewDidSelectRow(at: 0)
     }
     
     // MARK: - Helpers
@@ -86,6 +89,11 @@ class FeedAcceptanceTests: XCTestCase {
     }
 
     private func response(for url: URL) -> (Data, HTTPURLResponse) {
+        let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        return (makeData(for: url), response)
+    }
+
+    private func response(with data: Data, for url: URL) -> (Data, HTTPURLResponse) {
         let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
         return (makeData(for: url), response)
     }

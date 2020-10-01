@@ -12,7 +12,7 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     public var didSelect: ((UUID) -> Void)?
     public var onRefresh: (() -> Void)?
 
-    private var tableModel = [CellController]() {
+    private(set) var tableModel = [CellController]() {
         didSet { tableView.reloadData() }
     }
 
