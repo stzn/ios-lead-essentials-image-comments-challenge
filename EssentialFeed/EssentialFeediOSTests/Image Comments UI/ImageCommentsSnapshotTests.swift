@@ -70,8 +70,10 @@ class ImageCommentsSnapshotTests: XCTestCase {
         ]
 
         return ImageCommentsPresenter
-            .map(comments, calendar: calendar, locale: locale)
-            .comments.map(ImageCommentCellController.init(viewModel:))
+            .map(comments, calendar: calendar, locale: locale).comments
+            .map {
+                CellController(id: UUID(), dataSoruce: ImageCommentCellController.init(viewModel: $0))
+            }
     }
 }
 

@@ -77,7 +77,9 @@ private extension ListViewController {
             return cellController
         }
 
-        display(cells)
+        display(cells.map {
+                    CellController(id: UUID(), dataSoruce: $0, delegate: $0, prefetchDataSource: $0) }
+        )
     }
 }
 

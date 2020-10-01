@@ -5,7 +5,7 @@
 import EssentialFeed
 import UIKit
 
-public final class ImageCommentCellController: ImageCommentView, CellController {
+public final class ImageCommentCellController: NSObject, UITableViewDataSource {
     public var id: UUID {
         viewModel.id
     }
@@ -17,23 +17,23 @@ public final class ImageCommentCellController: ImageCommentView, CellController 
         self.viewModel = viewModel
     }
 
-    public func view(in tableView: UITableView) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         cell = tableView.dequeueReusableCell()
-        display(viewModel)
+        cell?.usernameLabel.text = viewModel.username
+        cell?.createdAtLabel.text = viewModel.createdAt
+        cell?.messageLabel.text = viewModel.message
         return cell!
     }
+}
 
-    public func cancelLoad() {
-        releaseCellForReuse()
-    }
-
+extension ImageCommentCellController: ImageCommentView {
     public func display(_ viewModel: ImageCommentViewModel) {
         cell?.usernameLabel.text = viewModel.username
         cell?.createdAtLabel.text = viewModel.createdAt
         cell?.messageLabel.text = viewModel.message
-    }
-
-    private func releaseCellForReuse() {
-        cell = nil
     }
 }
