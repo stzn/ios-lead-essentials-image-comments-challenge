@@ -5,7 +5,11 @@
 import EssentialFeed
 import UIKit
 
-public final class ImageCommentCellController: ImageCommentView {
+public final class ImageCommentCellController: ImageCommentView, CellController {
+    public var id: UUID {
+        viewModel.id
+    }
+
     private var cell: ImageCommentCell?
     private let viewModel: ImageCommentViewModel
 
@@ -13,15 +17,17 @@ public final class ImageCommentCellController: ImageCommentView {
         self.viewModel = viewModel
     }
 
-    func view(in tableView: UITableView) -> UITableViewCell {
+    public func view(in tableView: UITableView) -> UITableViewCell {
         cell = tableView.dequeueReusableCell()
         display(viewModel)
         return cell!
     }
 
-    func cancelLoad() {
+    public func cancelLoad() {
         releaseCellForReuse()
     }
+
+    public func preload() {}
 
     public func display(_ viewModel: ImageCommentViewModel) {
         cell?.usernameLabel.text = viewModel.username

@@ -12,7 +12,7 @@ class ImageCommentsSnapshotTests: XCTestCase {
     func test_imageCommentsWithContent() {
         let sut = makeSUT()
 
-        sut.display(imageCommentsWithContent())
+        sut.display(comments())
 
         assert(
             snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "IMAGE_COMMENT_WITH_CONTENT_light")
@@ -21,20 +21,17 @@ class ImageCommentsSnapshotTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func makeSUT() -> ImageCommentsViewController {
-        let bundle = Bundle(for: ImageCommentsViewController.self)
+    private func makeSUT() -> ListViewController {
+        let bundle = Bundle(for: ListViewController.self)
         let storyboard = UIStoryboard(name: "ImageComments", bundle: bundle)
-        let controller =
-            storyboard.instantiateInitialViewController { coder in
-                ImageCommentsViewController(coder: coder, feedId: UUID())
-            }!
+        let controller = storyboard.instantiateInitialViewController() as! ListViewController
         controller.loadViewIfNeeded()
         controller.tableView.showsVerticalScrollIndicator = false
         controller.tableView.showsHorizontalScrollIndicator = false
         return controller
     }
 
-    private func imageCommentsWithContent() -> [ImageCommentViewModel] {
+    private func comments() -> [CellController] {
         let now = Date()
         let calendar = Calendar(identifier: .gregorian)
         let locale = Locale(identifier: "en_US_POSIX")
@@ -72,18 +69,9 @@ class ImageCommentsSnapshotTests: XCTestCase {
                 username: "user f"),
         ]
 
-        return ImageCommentsPresenter.map(comments, calendar: calendar, locale: locale).comments
-    }
-
-}
-
-extension ImageCommentsViewController {
-    fileprivate func display(_ viewModels: [ImageCommentViewModel]) {
-        let cells: [ImageCommentCellController] = viewModels.map { viewModel in
-            return ImageCommentCellController(viewModel: viewModel)
-        }
-
-        self.display(cells)
+        return ImageCommentsPresenter
+            .map(comments, calendar: calendar, locale: locale)
+            .comments.map(ImageCommentCellController.init(viewModel:))
     }
 }
 

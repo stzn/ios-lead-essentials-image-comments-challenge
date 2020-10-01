@@ -89,7 +89,6 @@
 		D64D7EFF25096E6700378982 /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7EFE25096E6700378982 /* LoadingViewModel.swift */; };
 		D64D7F0125096EBC00378982 /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F0025096EBC00378982 /* ErrorViewModel.swift */; };
 		D64D7F0F250ABD2400378982 /* ImageCommentsSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F0E250ABD2400378982 /* ImageCommentsSnapshotTests.swift */; };
-		D64D7F13250ABE2500378982 /* ImageCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F12250ABE2500378982 /* ImageCommentsViewController.swift */; };
 		D64D7F15250ABE6C00378982 /* ImageCommentCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F14250ABE6C00378982 /* ImageCommentCellController.swift */; };
 		D64D7F18250ABEE800378982 /* ImageCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F17250ABEE800378982 /* ImageCommentCell.swift */; };
 		D64D7F1F250AD6A900378982 /* ImageCommentsPresentationTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64D7F1E250AD6A900378982 /* ImageCommentsPresentationTestHelpers.swift */; };
@@ -217,7 +216,6 @@
 		D64D7EFE25096E6700378982 /* LoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewModel.swift; sourceTree = "<group>"; };
 		D64D7F0025096EBC00378982 /* ErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
 		D64D7F0E250ABD2400378982 /* ImageCommentsSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsSnapshotTests.swift; sourceTree = "<group>"; };
-		D64D7F12250ABE2500378982 /* ImageCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsViewController.swift; sourceTree = "<group>"; };
 		D64D7F14250ABE6C00378982 /* ImageCommentCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentCellController.swift; sourceTree = "<group>"; };
 		D64D7F17250ABEE800378982 /* ImageCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentCell.swift; sourceTree = "<group>"; };
 		D64D7F1E250AD6A900378982 /* ImageCommentsPresentationTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsPresentationTestHelpers.swift; sourceTree = "<group>"; };
@@ -647,7 +645,6 @@
 		D64D7F11250ABE0400378982 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D64D7F12250ABE2500378982 /* ImageCommentsViewController.swift */,
 				D64D7F14250ABE6C00378982 /* ImageCommentCellController.swift */,
 			);
 			path = Controllers;
@@ -1027,7 +1024,6 @@
 				D64D7F15250ABE6C00378982 /* ImageCommentCellController.swift in Sources */,
 				08B5EB5022CE328100FE8683 /* UIView+Shimmering.swift in Sources */,
 				0822D0F523058078004B3345 /* UITableView+Dequeueing.swift in Sources */,
-				D64D7F13250ABE2500378982 /* ImageCommentsViewController.swift in Sources */,
 				08BB7EAB22C1425100F8B83C /* ListViewController.swift in Sources */,
 				0822D0F7230581D2004B3345 /* UIImageView+Animations.swift in Sources */,
 				08B5EB4E22CE244400FE8683 /* FeedImageCell.swift in Sources */,
