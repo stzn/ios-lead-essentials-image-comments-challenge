@@ -9,15 +9,6 @@ import XCTest
 
 class ImageCommentsSnapshotTests: XCTestCase {
 
-    func test_emptyImageComments() {
-        let sut = makeSUT()
-
-        sut.display(emptyImageComments())
-
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "EMPTY_IMAGE_COMMENT_light")
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "EMPTY_IMAGE_COMMENT_dark")
-    }
-
     func test_imageCommentsWithContent() {
         let sut = makeSUT()
 
@@ -26,19 +17,6 @@ class ImageCommentsSnapshotTests: XCTestCase {
         assert(
             snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "IMAGE_COMMENT_WITH_CONTENT_light")
         assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "IMAGE_COMMENT_WITH_CONTENT_dark")
-    }
-
-    func test_imageCommentsWithErrorMessage() {
-        let sut = makeSUT()
-
-        sut.display(.error(message: "This is a\nmulti-line\nerror message"))
-
-        assert(
-            snapshot: sut.snapshot(for: .iPhone8(style: .light)),
-            named: "IMAGE_COMMENT_WITH_ERROR_MESSAGE_light")
-        assert(
-            snapshot: sut.snapshot(for: .iPhone8(style: .dark)),
-            named: "IMAGE_COMMENT_WITH_ERROR_MESSAGE_dark")
     }
 
     // MARK: - Helpers
@@ -54,10 +32,6 @@ class ImageCommentsSnapshotTests: XCTestCase {
         controller.tableView.showsVerticalScrollIndicator = false
         controller.tableView.showsHorizontalScrollIndicator = false
         return controller
-    }
-
-    private func emptyImageComments() -> [ImageCommentCellController] {
-        return []
     }
 
     private func imageCommentsWithContent() -> [ImageCommentViewModel] {
