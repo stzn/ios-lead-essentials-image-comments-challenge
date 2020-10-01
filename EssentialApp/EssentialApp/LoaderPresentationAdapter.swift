@@ -49,11 +49,3 @@ extension LoaderPresentationAdapter: FeedImageCellControllerDelegate {
         cancellable = nil
     }
 }
-
-extension LoaderPresentationAdapter: ImageCommentsViewControllerDelegate {
-    func didRequestImageCommentsRefresh(feedId: UUID) {
-        loadContent()
-    }
-}
-
-

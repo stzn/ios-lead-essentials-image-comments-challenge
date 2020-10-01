@@ -63,7 +63,7 @@ class FeedAcceptanceTests: XCTestCase {
         navigationController.view.enforceLayoutCycle()
 
         let viewController = navigationController.viewControllers.last
-        XCTAssertTrue(viewController is ImageCommentsViewController)
+        XCTAssertTrue(viewController is ListViewController)
     }
     
     // MARK: - Helpers

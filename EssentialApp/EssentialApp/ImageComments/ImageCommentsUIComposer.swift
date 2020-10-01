@@ -12,13 +12,12 @@ public final class ImageCommentsUIComposer {
 
     private typealias ImageCommentsPresentationAdapter = LoaderPresentationAdapter<[ImageComment], ImageCommentsViewAdapter>
     public static func imageCommnetsComposedWith(
-        feedId: UUID,
         imageCommentsLoader: @escaping () -> AnyPublisher<[ImageComment], Swift.Error>
-    ) -> ImageCommentsViewController {
+    ) -> ListViewController {
         let presentationAdapter = ImageCommentsPresentationAdapter(loader: imageCommentsLoader)
 
-        let imageCommentsController = makeImageCommentsViewController(
-            feedId: feedId, delegate: presentationAdapter)
+        let imageCommentsController = makeImageCommentsViewController()
+        imageCommentsController.onRefresh = presentationAdapter.loadContent
 
         presentationAdapter.presenter = Presenter<[ImageComment], ImageCommentsViewAdapter>(
             view: ImageCommentsViewAdapter(controller: imageCommentsController),
@@ -29,19 +28,10 @@ public final class ImageCommentsUIComposer {
         return imageCommentsController
     }
 
-    private static func makeImageCommentsViewController(
-        feedId: UUID,
-        delegate: ImageCommentsViewControllerDelegate) -> ImageCommentsViewController {
-        let bundle = Bundle(for: ImageCommentsViewController.self)
+    private static func makeImageCommentsViewController() -> ListViewController {
+        let bundle = Bundle(for: ListViewController.self)
         let storyboard = UIStoryboard(name: "ImageComments", bundle: bundle)
-
-        guard let viewController =
-                (storyboard.instantiateInitialViewController { coder in
-                    ImageCommentsViewController(coder: coder, feedId: feedId)
-                }) else {
-            fatalError()
-        }
-        viewController.delegate = delegate
+        let viewController = storyboard.instantiateInitialViewController() as! ListViewController
         viewController.title = ImageCommentsPresenter.title
         return viewController
     }

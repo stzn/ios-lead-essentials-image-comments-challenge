@@ -50,7 +50,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         feedViewController.didSelect = { [navigationController, feedViewController] id in
             let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
-                feedId: id,
                 imageCommentsLoader: { self.makeRemoteImageCommentsLoader(id) } )
 
             feedViewController.navigationItem.backBarButtonItem

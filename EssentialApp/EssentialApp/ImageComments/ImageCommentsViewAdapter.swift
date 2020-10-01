@@ -8,9 +8,9 @@ import EssentialFeediOS
 import UIKit
 
 final class ImageCommentsViewAdapter: ResourceView {
-    private weak var controller: ImageCommentsViewController?
+    private weak var controller: ListViewController?
 
-    init(controller: ImageCommentsViewController) {
+    init(controller: ListViewController) {
         self.controller = controller
     }
 

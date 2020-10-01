@@ -8,7 +8,7 @@ import EssentialFeediOS
 
 extension ImageCommentsUIIntegrationTests {
 
-    func assertThat(_ sut: ImageCommentsViewController, isRendering comments: [ImageComment], file: StaticString = #file, line: UInt = #line) {
+    func assertThat(_ sut: ListViewController, isRendering comments: [ImageComment], file: StaticString = #file, line: UInt = #line) {
         sut.view.enforceLayoutCycle()
 
         guard sut.numberOfRenderedImageCommentsViews() == comments.count else {
@@ -20,7 +20,7 @@ extension ImageCommentsUIIntegrationTests {
         }
     }
 
-    func assertThat(_ sut: ImageCommentsViewController, hasViewConfiguredFor comment: ImageComment, at index: Int,
+    func assertThat(_ sut: ListViewController, hasViewConfiguredFor comment: ImageComment, at index: Int,
                     file: StaticString = #file, line: UInt = #line) {
         let view = sut.imageCommentsView(at: index)
 

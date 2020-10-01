@@ -5,7 +5,7 @@
 import UIKit
 import EssentialFeediOS
 
-extension ImageCommentsViewController {
+extension ListViewController {
     func simulateUserInitiatedImageCommentsReload() {
         refreshControl?.simulatePullToRefresh()
     }
@@ -38,14 +38,6 @@ extension ImageCommentsViewController {
         let ds = tableView.prefetchDataSource
         let index = IndexPath(row: row, section: feedImagesSection)
         ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
-    }
-
-    var errorMessage: String? {
-        return errorView?.message
-    }
-
-    var isShowingLoadingIndicator: Bool {
-        return refreshControl?.isRefreshing == true
     }
 
     func numberOfRenderedImageCommentsViews() -> Int {
