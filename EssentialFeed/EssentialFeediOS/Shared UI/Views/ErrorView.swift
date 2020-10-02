@@ -32,7 +32,8 @@ public final class ErrorView: UIButton {
         titleLabel?.numberOfLines = 0
         titleLabel?.textColor = .white
         titleLabel?.textAlignment = .center
-        titleLabel?.font = .systemFont(ofSize: 17)
+        titleLabel?.font = .preferredFont(forTextStyle: .body)
+        titleLabel?.adjustsFontForContentSizeCategory = true
     }
 
     private var isVisible: Bool {
