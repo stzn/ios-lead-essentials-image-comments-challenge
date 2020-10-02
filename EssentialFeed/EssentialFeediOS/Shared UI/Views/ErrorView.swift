@@ -4,19 +4,33 @@
 
 import UIKit
 
-public final class ErrorView: UIView {
-    @IBOutlet private var label: UILabel!
-
+public final class ErrorView: UIButton {
     public var message: String? {
-        get { return isVisible ? label.text : nil }
+        get { return isVisible ? titleLabel?.text : nil }
         set { setMessageAnimated(newValue) }
     }
 
-    public override func awakeFromNib() {
-        super.awakeFromNib()
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+        hideMessage()
+    }
 
-        label.text = nil
-        alpha = 0
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func configure() {
+        backgroundColor = .errorBackgroundColor
+        addTarget(self, action: #selector(hideMessageAnimated), for: .touchUpInside)
+        configureTitleLabel()
+    }
+
+    private func configureTitleLabel() {
+        titleLabel?.numberOfLines = 0
+        titleLabel?.textColor = .white
+        titleLabel?.textAlignment = .center
+        titleLabel?.font = .systemFont(ofSize: 17)
     }
 
     private var isVisible: Bool {
@@ -32,19 +46,33 @@ public final class ErrorView: UIView {
     }
 
     private func showAnimated(_ message: String) {
-        label.text = message
+        setTitle(message, for: .normal)
+        contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
 
         UIView.animate(withDuration: 0.25) {
             self.alpha = 1
         }
     }
 
-    @IBAction private func hideMessageAnimated() {
+    @objc private func hideMessageAnimated() {
         UIView.animate(
             withDuration: 0.25,
             animations: { self.alpha = 0 },
             completion: { completed in
-                if completed { self.label.text = nil }
+                if completed { self.titleLabel?.text = nil }
             })
     }
+
+    private func hideMessage() {
+        setTitle(nil, for: .normal)
+        alpha = 0
+        contentEdgeInsets = .init(top: -2.5, left: 0, bottom: -2.5, right: 0)
+    }
 }
+
+extension UIColor {
+    static var errorBackgroundColor: UIColor {
+        UIColor(red: 0.99951404330000004, green: 0.41759261489999999, blue: 0.4154433012, alpha: 1)
+    }
+}
+

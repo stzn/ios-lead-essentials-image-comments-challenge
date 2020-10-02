@@ -6,7 +6,7 @@ import UIKit
 import EssentialFeed
 
 public final class ListViewController: UITableViewController, UITableViewDataSourcePrefetching, LoadingView, EssentialFeed.ErrorView {
-    @IBOutlet private(set) public var errorView: ErrorView?
+    private(set) public var errorView = ErrorView()
 
     private var loadingControllers = [IndexPath: CellController]()
     public var didSelect: ((UUID) -> Void)?
@@ -19,6 +19,7 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.tableHeaderView = errorView.makeContainer()
         refresh()
     }
 
@@ -42,7 +43,7 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     }
 
     public func display(_ viewModel: ErrorViewModel) {
-        errorView?.message = viewModel.message
+        errorView.message = viewModel.message
     }
 
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
