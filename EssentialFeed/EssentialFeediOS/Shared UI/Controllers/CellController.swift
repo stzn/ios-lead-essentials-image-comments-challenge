@@ -24,3 +24,14 @@ public struct CellController {
     }
 }
 
+extension CellController: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+extension CellController: Equatable {
+    public static func == (lhs: CellController, rhs: CellController) -> Bool {
+        lhs.id == rhs.id
+    }
+}

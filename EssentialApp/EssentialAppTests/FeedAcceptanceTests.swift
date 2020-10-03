@@ -61,10 +61,12 @@ class FeedAcceptanceTests: XCTestCase {
             }
             navigationController.view.enforceLayoutCycle()
 
-            guard let viewController = navigationController.viewControllers.last as? ListViewController else {
+            guard let viewController = navigationController.viewControllers.last as? ListViewController,
+                  let item = viewController.dataSource.itemIdentifier(for: IndexPath(row: 0, section: 0)) else {
                 return
             }
-            XCTAssertEqual(viewController.tableModel.first?.id, feedId)
+
+            XCTAssertEqual(item.id, feedId)
         }
         feed.simulateFeedImageViewDidSelectRow(at: 0)
     }
