@@ -29,7 +29,9 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
         tableView.dataSource = dataSource
 
         errorView.onHide = { [weak self] in
+            self?.tableView.beginUpdates()
             self?.tableView.sizeTableHeaderToFit()
+            self?.tableView.endUpdates()
         }
     }
 
