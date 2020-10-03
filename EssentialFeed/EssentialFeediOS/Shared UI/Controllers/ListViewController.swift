@@ -24,8 +24,10 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     }
 
     private func configureTableView() {
+        dataSource.defaultRowAnimation = .fade
         tableView.tableHeaderView = errorView.makeContainer()
         tableView.dataSource = dataSource
+
         errorView.onHide = { [weak self] in
             self?.tableView.sizeTableHeaderToFit()
         }
