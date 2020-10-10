@@ -14,7 +14,6 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
         }
     }()
 
-    public var didSelect: ((UUID) -> Void)?
     public var onRefresh: (() -> Void)?
 
     public override func viewDidLoad() {
@@ -88,9 +87,6 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
 
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        guard let id = dataSource.itemIdentifier(for: indexPath)?.id else {
-            return
-        }
-        didSelect?(id)
+        cellController(forRowAt: indexPath)?.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
 }

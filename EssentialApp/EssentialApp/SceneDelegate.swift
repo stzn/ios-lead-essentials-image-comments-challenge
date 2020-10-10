@@ -25,6 +25,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         LocalFeedLoader(store: store, currentDate: Date.init)
     }()
 
+    private lazy var feedViewController = FeedUIComposer.feedComposedWith(
+            feedLoader: makeRemoteFeedLoaderWithLocalFallback,
+            imageLoader: makeLocalImageLoaderWithRemoteFallback,
+            selection: showImageComments)
+
+    private lazy var navigationController = UINavigationController(
+        rootViewController: feedViewController)
+
     convenience init(httpClient: HTTPClient, store: FeedStore & FeedImageDataStore) {
         self.init()
         self.httpClient = httpClient
@@ -39,26 +47,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func configureWindow() {
-        let feedViewController = FeedUIComposer.feedComposedWith(
-            feedLoader: makeRemoteFeedLoaderWithLocalFallback,
-            imageLoader: makeLocalImageLoaderWithRemoteFallback)
-
-        let navigationController = UINavigationController(
-            rootViewController: feedViewController)
-
         window?.rootViewController = navigationController
 
-        feedViewController.didSelect = { [navigationController, feedViewController] id in
-            let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
-                imageCommentsLoader: { self.makeRemoteImageCommentsLoader(id) } )
-
-            feedViewController.navigationItem.backBarButtonItem
-                = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
-            navigationController.pushViewController(commentsViewController, animated: true)
-        }
-
+//        feedViewController.didSelect = { [navigationController, feedViewController] id in
+//            let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
+//                imageCommentsLoader: { self.makeRemoteImageCommentsLoader(id) } )
+//
+//            feedViewController.navigationItem.backBarButtonItem
+//                = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//
+//            navigationController.pushViewController(commentsViewController, animated: true)
+//        }
+//
         window?.makeKeyAndVisible()
+    }
+
+    private func showImageComments(for model: FeedImage) {
+        let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
+            imageCommentsLoader: { self.makeRemoteImageCommentsLoader(model.id) } )
+
+        feedViewController.navigationItem.backBarButtonItem
+            = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+        navigationController.pushViewController(commentsViewController, animated: true)
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

@@ -10,17 +10,21 @@ import EssentialFeediOS
 final class FeedViewAdapter: ResourceView {
     private weak var controller: ListViewController?
     private let imageLoader: (URL) -> AnyPublisher<Data, Swift.Error>
+    private let selection: (FeedImage) -> Void
     typealias FeedImageDataLoaderPresentationAdapter = LoaderPresentationAdapter<Data, WeakRefVirtualProxy<FeedImageCellController>>
 
-    init(controller: ListViewController, imageLoader: @escaping (URL) -> AnyPublisher<Data, Swift.Error>) {
+    init(controller: ListViewController, imageLoader: @escaping (URL) -> AnyPublisher<Data, Swift.Error>,
+         selection: @escaping (FeedImage) -> Void) {
         self.controller = controller
         self.imageLoader = imageLoader
+        self.selection = selection
     }
 
     func display(_ viewModel: FeedViewModel) {
         controller?.display(viewModel.feed.map { model in
             let adapter = FeedImageDataLoaderPresentationAdapter(loader: { [imageLoader] in imageLoader(model.url) })
-            let view = FeedImageCellController(viewModel: FeedImagePresenter.map(model), delegate: adapter)
+            let view = FeedImageCellController(viewModel: FeedImagePresenter.map(model), delegate: adapter,
+                                               selection: { [selection] in selection(model) })
             adapter.presenter = Presenter(
                 view: WeakRefVirtualProxy(view),
                 loadingView: WeakRefVirtualProxy(view),

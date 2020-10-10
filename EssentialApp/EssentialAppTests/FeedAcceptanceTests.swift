@@ -52,25 +52,6 @@ class FeedAcceptanceTests: XCTestCase {
         XCTAssertNotNil(store.feedCache, "Expected to keep non-expired cache")
     }
 
-    func test_didSelectFeedImage_displaysImageCommentsWhenFeedImageSelected() {
-        let feed = launch(httpClient: .online(response), store: .empty)
-        feed.didSelect = { feedId in
-            guard let navigationController = feed.navigationController else {
-                XCTFail("UINavigationController should be rootViewController")
-                return
-            }
-            navigationController.view.enforceLayoutCycle()
-
-            guard let viewController = navigationController.viewControllers.last as? ListViewController,
-                  let item = viewController.dataSource.itemIdentifier(for: IndexPath(row: 0, section: 0)) else {
-                return
-            }
-
-            XCTAssertEqual(item.id, feedId)
-        }
-        feed.simulateFeedImageViewDidSelectRow(at: 0)
-    }
-    
     // MARK: - Helpers
 
     private func launch(

@@ -15,13 +15,13 @@ public final class FeedImageCellController: NSObject, UITableViewDataSource, UIT
     private let delegate: FeedImageCellControllerDelegate
     private var cell: FeedImageCell?
     private var viewModel: FeedImageViewModel
-    public var id: UUID {
-        return viewModel.id
-    }
+    private let selection: () -> Void
 
-    public init(viewModel: FeedImageViewModel, delegate: FeedImageCellControllerDelegate) {
+    public init(viewModel: FeedImageViewModel, delegate: FeedImageCellControllerDelegate,
+                selection: @escaping () -> Void) {
         self.viewModel = viewModel
         self.delegate = delegate
+        self.selection = selection
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,6 +40,10 @@ public final class FeedImageCellController: NSObject, UITableViewDataSource, UIT
 
         delegate.didRequestImage()
         return cell!
+    }
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selection()
     }
 
     public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
