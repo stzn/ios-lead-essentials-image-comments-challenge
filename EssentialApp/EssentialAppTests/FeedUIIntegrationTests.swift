@@ -330,20 +330,22 @@ final class FeedUIIntegrationTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
 
-    func test_didSelectFeedImage_displaysImageCommentsWhenFeedImageSelected() {
+    func test_imageSelection_displaysImageCommentsWhenFeedImageSelected() {
+        let image0 = makeImage()
+        let image1 = makeImage()
         var selectedImages: [FeedImage] = []
         let (sut, loader) = makeSUT { selectedImages.append($0) }
 
         sut.loadViewIfNeeded()
-        loader.completeFeedLoading(with: [makeImage()])
-        _ = sut.simulateFeedImageViewVisible(at: 0)
-        
-        XCTAssertEqual(selectedImages.count, 0)
+        loader.completeFeedLoading(with: [image0, image1])
 
         sut.simulateFeedImageViewDidSelectRow(at: 0)
+        XCTAssertEqual(selectedImages, [image0])
 
-        XCTAssertEqual(selectedImages.count, 1)
+        sut.simulateFeedImageViewDidSelectRow(at: 1)
+        XCTAssertEqual(selectedImages, [image0, image1])
     }
+
     // MARK: - Helpers
 
     private func makeSUT(selection: @escaping (FeedImage) -> Void = { _ in },
