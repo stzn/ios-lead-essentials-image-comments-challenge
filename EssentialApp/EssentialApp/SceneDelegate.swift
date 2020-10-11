@@ -10,6 +10,7 @@ import EssentialFeed
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
+    private let baseURL: URL = URL(string: "http://image-comments-challenge.essentialdeveloper.com")!
     private lazy var httpClient: HTTPClient = {
         URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     }()
@@ -66,7 +67,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedImage], Swift.Error> {
-        let remoteURL = URL(string: "http://image-comments-challenge.essentialdeveloper.com/feed")!
+        let remoteURL = FeedEndpoint.get.url(baseURL: baseURL)
 
         return httpClient
             .getPublisher(from: remoteURL)
@@ -89,7 +90,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func makeRemoteImageCommentsLoader(_ feedId: UUID) -> AnyPublisher<[ImageComment], Swift.Error> {
-        let remoteURL = URL(string: "http://image-comments-challenge.essentialdeveloper.com/image/\(feedId)/comments")!
+        let remoteURL = ImageCommentsEndpoint.get(feedId).url(baseURL: baseURL)
         return httpClient
             .getPublisher(from: remoteURL)
             .tryMap(ImageCommentsMapper.map)
