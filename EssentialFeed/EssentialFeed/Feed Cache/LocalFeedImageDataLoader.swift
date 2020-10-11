@@ -37,7 +37,6 @@ extension LocalFeedImageDataLoader {
     }
 
     private final class LoadImageDataTask: FeedImageDataLoaderTask {
-        private let dataAccessQueue = DispatchQueue(label: "dataAccessQueue")
         private var completion: ((LoadResult) -> Void)?
 
         init(_ completion: @escaping (LoadResult) -> Void) {
@@ -45,9 +44,7 @@ extension LocalFeedImageDataLoader {
         }
 
         func complete(with result: LoadResult) {
-            dataAccessQueue.sync {
-                self.completion?(result)
-            }
+            self.completion?(result)
         }
 
         func cancel() {
@@ -55,9 +52,7 @@ extension LocalFeedImageDataLoader {
         }
 
         private func preventFurtherCompletions() {
-            dataAccessQueue.async(flags: .barrier) {
-                self.completion = nil
-            }
+            self.completion = nil
         }
     }
 
