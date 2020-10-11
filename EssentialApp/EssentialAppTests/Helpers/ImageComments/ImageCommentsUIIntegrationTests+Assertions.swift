@@ -24,7 +24,7 @@ extension ImageCommentsUIIntegrationTests {
                     file: StaticString = #file, line: UInt = #line) {
         let view = sut.imageCommentsView(at: index)
 
-        guard let cell = view as? ImageCommentCell else {
+        guard let cell = view else {
             return XCTFail("Expected \(ImageCommentCell.self) instance, got \(String(describing: view)) instead", file: file, line: line)
         }
 

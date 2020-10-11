@@ -24,10 +24,10 @@ final class ImageCommentsUIIntegrationTests: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertEqual(loader.loadImageCommentsCallCount, 1, "Expected a loading request once view is loaded")
 
-        sut.simulateUserInitiatedImageCommentsReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadImageCommentsCallCount, 2, "Expected another loading request once user initiates a reload")
 
-        sut.simulateUserInitiatedImageCommentsReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadImageCommentsCallCount, 3, "Expected yet another loading request once user initiates another reload")
     }
 
@@ -40,7 +40,7 @@ final class ImageCommentsUIIntegrationTests: XCTestCase {
         loader.completeImageCommentsLoading(at: 0)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
 
-        sut.simulateUserInitiatedImageCommentsReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
 
         loader.completeImageCommentsLoadingWithError(at: 1)
@@ -58,7 +58,7 @@ final class ImageCommentsUIIntegrationTests: XCTestCase {
         loader.completeImageCommentsLoading(with: [image0], at: 0)
         assertThat(sut, isRendering: [image0])
 
-        sut.simulateUserInitiatedImageCommentsReload()
+        sut.simulateUserInitiatedReload()
         loader.completeImageCommentsLoading(with: [image0, image1], at: 1)
         assertThat(sut, isRendering: [image0, image1])
     }
@@ -72,7 +72,7 @@ final class ImageCommentsUIIntegrationTests: XCTestCase {
         loader.completeImageCommentsLoading(with: [image0, image1], at: 0)
         assertThat(sut, isRendering: [image0, image1])
 
-        sut.simulateUserInitiatedImageCommentsReload()
+        sut.simulateUserInitiatedReload()
         loader.completeImageCommentsLoading(with: [], at: 1)
         assertThat(sut, isRendering: [])
     }
@@ -85,7 +85,7 @@ final class ImageCommentsUIIntegrationTests: XCTestCase {
         loader.completeImageCommentsLoading(with: [image0], at: 0)
         assertThat(sut, isRendering: [image0])
 
-        sut.simulateUserInitiatedImageCommentsReload()
+        sut.simulateUserInitiatedReload()
         loader.completeImageCommentsLoadingWithError(at: 1)
         assertThat(sut, isRendering: [image0])
     }
@@ -100,7 +100,7 @@ final class ImageCommentsUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage,
                        sharedLocalized("VIEW_CONNECTION_ERROR"))
 
-        sut.simulateUserInitiatedImageCommentsReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(sut.errorMessage, nil)
     }
 
