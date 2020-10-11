@@ -48,17 +48,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func configureWindow() {
         window?.rootViewController = navigationController
-
-//        feedViewController.didSelect = { [navigationController, feedViewController] id in
-//            let commentsViewController = ImageCommentsUIComposer.imageCommnetsComposedWith(
-//                imageCommentsLoader: { self.makeRemoteImageCommentsLoader(id) } )
-//
-//            feedViewController.navigationItem.backBarButtonItem
-//                = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-//
-//            navigationController.pushViewController(commentsViewController, animated: true)
-//        }
-//
         window?.makeKeyAndVisible()
     }
 
