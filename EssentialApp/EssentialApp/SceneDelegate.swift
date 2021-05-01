@@ -58,6 +58,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	private func showComments(for image: FeedImage) {
 		let url = ImageCommentsEndpoint.get(image).url(baseURL: baseURL)
 		let comments = CommentsUIComposer.commentsComposedWith(commentsLoader: makeImageCommentsLoader(url: url))
+		let feed = navigationController.topViewController
+		feed?.navigationItem.backButtonDisplayMode = .minimal
+		navigationController.navigationBar.tintColor = .label
 		navigationController.pushViewController(comments, animated: true)
 	}
 
