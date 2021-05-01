@@ -7,9 +7,9 @@ import Foundation
 public final class ImageCommentsPresenter {
 	public static var title: String {
 		NSLocalizedString(
-			"FEED_VIEW_TITLE",
-			tableName: "Feed",
-			bundle: Bundle(for: FeedPresenter.self),
+			"IMAGE_COMMENTS_TITLE",
+			tableName: "ImageComments",
+			bundle: Bundle(for: ImageCommentsPresenter.self),
 			comment: "Title for the feed view")
 	}
 
