@@ -52,13 +52,7 @@ class FeedAcceptanceTests: XCTestCase {
 	}
 
 	func test_onFeedImageSelection_displaysImageComments() {
-		let feed = launch(httpClient: .online(response), store: .empty)
-
-		feed.simulateTapOnFeedImage(at: 0)
-		RunLoop.current.run(until: Date())
-
-		let navigation = feed.navigationController
-		let comments = navigation?.topViewController as! ListViewController
+		let comments = showCommentsForImage()
 
 		XCTAssertEqual(comments.numberOfRenderedComments(), 1)
 		XCTAssertEqual(comments.commentMessage(at: 0), "a message")
@@ -81,6 +75,16 @@ class FeedAcceptanceTests: XCTestCase {
 	private func enterBackground(with store: InMemoryFeedStore) {
 		let sut = SceneDelegate(httpClient: HTTPClientStub.offline, store: store)
 		sut.sceneWillResignActive(UIApplication.shared.connectedScenes.first!)
+	}
+
+	private func showCommentsForImage(at index: Int = 0) -> ListViewController {
+		let feed = launch(httpClient: .online(response), store: .empty)
+
+		feed.simulateTapOnFeedImage(at: index)
+		RunLoop.current.run(until: Date())
+
+		let navigation = feed.navigationController
+		return navigation?.topViewController as! ListViewController
 	}
 
 	private func response(for url: URL) -> (Data, HTTPURLResponse) {
