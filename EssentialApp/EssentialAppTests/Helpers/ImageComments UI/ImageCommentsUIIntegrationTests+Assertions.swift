@@ -7,12 +7,11 @@ import EssentialFeed
 import EssentialFeediOS
 
 extension ImageCommentsUIIntegrationTests {
-	func assertThat(_ sut: ListViewController, isRendering comments: [ImageComment], currentDate: Date,
+	func assertThat(_ sut: ListViewController, isRendering comments: [ImageComment],
 	                file: StaticString = #filePath, line: UInt = #line) {
-		sut.view.enforceLayoutCycle()
 		XCTAssertEqual(sut.numberOfRenderedComments(), comments.count, "comments count", file: file, line: line)
 
-		let viewModel = ImageCommentsPresenter.map(comments, currentDate: currentDate)
+		let viewModel = ImageCommentsPresenter.map(comments)
 
 		viewModel.comments.enumerated().forEach { index, comment in
 			XCTAssertEqual(sut.commentMessage(at: index), comment.message, "message at \(index)", file: file, line: line)
