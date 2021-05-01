@@ -67,7 +67,7 @@
                                 <accessibility key="accessibilityConfiguration" identifier="feed-image-cell"/>
                                 <connections>
                                     <outlet property="createAtLabel" destination="kPa-q5-QaF" id="FYk-J3-kBo"/>
-                                    <outlet property="descriptionLabel" destination="awf-gd-jdx" id="RcD-vf-fHy"/>
+                                    <outlet property="messageLabel" destination="awf-gd-jdx" id="RcD-vf-fHy"/>
                                     <outlet property="usernameLabel" destination="mHd-Wb-fea" id="nM2-lJ-BDK"/>
                                 </connections>
                             </tableViewCell>

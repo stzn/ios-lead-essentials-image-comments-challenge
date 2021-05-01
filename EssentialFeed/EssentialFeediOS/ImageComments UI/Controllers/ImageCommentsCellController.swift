@@ -23,7 +23,7 @@ extension ImageCommentCellController: UITableViewDataSource, UITableViewDelegate
 		cell = tableView.dequeueReusableCell()
 		cell?.usernameLabel.text = viewModel.username
 		cell?.createAtLabel.text = viewModel.createdAt
-		cell?.descriptionLabel.text = viewModel.message
+		cell?.messageLabel.text = viewModel.message
 		return cell!
 	}
 
