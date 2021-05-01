@@ -6,16 +6,16 @@ import Foundation
 
 public final class ImageCommentsMapper {
 	private struct Root: Decodable {
-		private let items: [RemoteImageComment]
+		private let items: [Item]
 
-		private struct RemoteImageComment: Decodable {
+		private struct Item: Decodable {
 			let id: UUID
 			let message: String
 			let created_at: Date
-			let author: CommentAuthorObject
+			let author: Author
 		}
 
-		private struct CommentAuthorObject: Decodable {
+		private struct Author: Decodable {
 			let username: String
 		}
 
