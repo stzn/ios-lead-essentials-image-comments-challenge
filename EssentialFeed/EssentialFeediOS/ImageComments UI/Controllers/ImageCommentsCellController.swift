@@ -5,7 +5,7 @@
 import UIKit
 import EssentialFeed
 
-public final class ImageCommentsCellController: NSObject {
+public final class ImageCommentCellController: NSObject {
 	private let viewModel: ImageCommentViewModel
 	private var cell: ImageCommentCell?
 
@@ -14,7 +14,7 @@ public final class ImageCommentsCellController: NSObject {
 	}
 }
 
-extension ImageCommentsCellController: UITableViewDataSource, UITableViewDelegate {
+extension ImageCommentCellController: UITableViewDataSource, UITableViewDelegate {
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		1
 	}

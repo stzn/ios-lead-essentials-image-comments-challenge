@@ -33,14 +33,14 @@ class ImageCommentsSnapshotTests: XCTestCase {
 		commentCellControllers().map { CellController(id: UUID(), $0) }
 	}
 
-	private func commentCellControllers() -> [ImageCommentsCellController] {
+	private func commentCellControllers() -> [ImageCommentCellController] {
 		return [
-			ImageCommentsCellController(
+			ImageCommentCellController(
 				viewModel: ImageCommentViewModel(message: String(repeating: "message1", count: 100),
 				                                 createdAt: "10 days ago",
 				                                 username: String(repeating: "username1", count: 5))
 			),
-			ImageCommentsCellController(
+			ImageCommentCellController(
 				viewModel: ImageCommentViewModel(message: "message2",
 				                                 createdAt: "1000 days ago",
 				                                 username: "username2")
@@ -52,7 +52,7 @@ class ImageCommentsSnapshotTests: XCTestCase {
 private extension ListViewController {
 	func display(_ stubs: [CommentStub]) {
 		let cells: [CellController] = stubs.map { stub in
-			let cellController = ImageCommentsCellController(viewModel: stub.viewModel)
+			let cellController = ImageCommentCellController(viewModel: stub.viewModel)
 			stub.controller = cellController
 			return CellController(id: UUID(), cellController)
 		}
@@ -63,7 +63,7 @@ private extension ListViewController {
 
 private class CommentStub {
 	let viewModel: ImageCommentViewModel
-	weak var controller: ImageCommentsCellController?
+	weak var controller: ImageCommentCellController?
 
 	init(message: String, createdAt: String, username: String) {
 		self.viewModel = ImageCommentViewModel(message: message, createdAt: createdAt, username: username)
