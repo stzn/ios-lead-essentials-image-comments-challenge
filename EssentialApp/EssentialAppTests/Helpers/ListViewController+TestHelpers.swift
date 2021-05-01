@@ -42,6 +42,8 @@ extension ListViewController {
 	}
 }
 
+// MARK: - Feed UI
+
 extension ListViewController {
 	@discardableResult
 	func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
@@ -93,6 +95,8 @@ extension ListViewController {
 
 	private var feedImagesSection: Int { 0 }
 }
+
+// MARK: - ImageComments UI
 
 extension ListViewController {
 	func numberOfRenderedComments() -> Int {
