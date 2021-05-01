@@ -7,24 +7,15 @@ import EssentialFeediOS
 @testable import EssentialFeed
 
 class ImageCommentsSnapshotTests: XCTestCase {
-//	func test_imageCommentsWithContent() {
-//		let sut = makeSUT()
-//
-//		sut.display(imageCommentsWithContent())
-//
-//		assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "IMAGE_COMMENTS_WITH_CONTENT_light")
-//		assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "IMAGE_COMMENTS_WITH_CONTENT_dark")
-//		assert(snapshot: sut.snapshot(for: .iPhone8(style: .light, contentSize: .extraExtraExtraLarge)), named: "IMAGE_COMMENTS_WITH_CONTENT_light_extraExtraExtraLarge")
-//	}
-//
-//	func test_imageCommentsWithFailedImageLoading() {
-//		let sut = makeSUT()
-//
-//		sut.display(imageCommentsWithFailedImageLoading())
-//
-//		assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "IMAGE_COMMENTS_WITH_FAILED_IMAGE_LOADING_light")
-//		assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "IMAGE_COMMENTS_WITH_FAILED_IMAGE_LOADING_dark")
-//	}
+	func test_imageCommentsWithContent() {
+		let sut = makeSUT()
+
+		sut.display(cellControllers())
+
+		assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "IMAGE_COMMENTS_WITH_CONTENT_light")
+		assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "IMAGE_COMMENTS_WITH_CONTENT_dark")
+		assert(snapshot: sut.snapshot(for: .iPhone8(style: .light, contentSize: .extraExtraExtraLarge)), named: "IMAGE_COMMENTS_WITH_CONTENT_light_extraExtraExtraLarge")
+	}
 
 	// MARK: - Helpers
 
@@ -38,41 +29,30 @@ class ImageCommentsSnapshotTests: XCTestCase {
 		return controller
 	}
 
-	private func imageCommentsWithContent() -> [ImageStub] {
-		return [
-			ImageStub(
-				description: "The East Side Gallery is an open-air gallery in Berlin. It consists of a series of murals painted directly on a 1,316 m long remnant of the Berlin Wall, located near the centre of Berlin, on Mühlenstraße in Friedrichshain-Kreuzberg. The gallery has official status as a Denkmal, or heritage-protected landmark.",
-				location: "East Side Gallery\nMemorial in Berlin, Germany",
-				image: UIImage.make(withColor: .red)
-			),
-			ImageStub(
-				description: "Garth Pier is a Grade II listed structure in Bangor, Gwynedd, North Wales.",
-				location: "Garth Pier",
-				image: UIImage.make(withColor: .green)
-			)
-		]
+	private func cellControllers() -> [CellController] {
+		commentCellControllers().map { CellController(id: UUID(), $0) }
 	}
 
-	private func imageCommentsWithFailedImageLoading() -> [ImageStub] {
+	private func commentCellControllers() -> [ImageCommentsCellController] {
 		return [
-			ImageStub(
-				description: nil,
-				location: "Cannon Street, London",
-				image: nil
+			ImageCommentsCellController(
+				viewModel: ImageCommentViewModel(message: String(repeating: "message1", count: 100),
+				                                 createdAt: "10 days ago",
+				                                 username: String(repeating: "username1", count: 5))
 			),
-			ImageStub(
-				description: nil,
-				location: "Brighton Seafront",
-				image: nil
-			)
+			ImageCommentsCellController(
+				viewModel: ImageCommentViewModel(message: "message2",
+				                                 createdAt: "1000 days ago",
+				                                 username: "username2")
+			),
 		]
 	}
 }
 
 private extension ListViewController {
-	func display(_ stubs: [ImageStub]) {
+	func display(_ stubs: [CommentStub]) {
 		let cells: [CellController] = stubs.map { stub in
-			let cellController = ImageCommentsCellController(viewModel: stub.viewModel, delegate: stub, selection: {})
+			let cellController = ImageCommentsCellController(viewModel: stub.viewModel)
 			stub.controller = cellController
 			return CellController(id: UUID(), cellController)
 		}
@@ -81,28 +61,11 @@ private extension ListViewController {
 	}
 }
 
-private class ImageStub: ImageCommentsCellControllerDelegate {
-	let viewModel: FeedImageViewModel
-	let image: UIImage?
+private class CommentStub {
+	let viewModel: ImageCommentViewModel
 	weak var controller: ImageCommentsCellController?
 
-	init(description: String?, location: String?, image: UIImage?) {
-		self.viewModel = FeedImageViewModel(
-			description: description,
-			location: location)
-		self.image = image
+	init(message: String, createdAt: String, username: String) {
+		self.viewModel = ImageCommentViewModel(message: message, createdAt: createdAt, username: username)
 	}
-
-	func didRequestImage() {
-		controller?.display(ResourceLoadingViewModel(isLoading: false))
-
-		if let image = image {
-			controller?.display(image)
-			controller?.display(ResourceErrorViewModel(message: .none))
-		} else {
-			controller?.display(ResourceErrorViewModel(message: "any"))
-		}
-	}
-
-	func didCancelImageRequest() {}
 }
