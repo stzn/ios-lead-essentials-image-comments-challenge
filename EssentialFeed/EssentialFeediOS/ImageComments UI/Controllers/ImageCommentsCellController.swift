@@ -14,7 +14,7 @@ public final class ImageCommentCellController: NSObject {
 	}
 }
 
-extension ImageCommentCellController: UITableViewDataSource, UITableViewDelegate {
+extension ImageCommentCellController: UITableViewDataSource {
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		1
 	}
@@ -25,13 +25,5 @@ extension ImageCommentCellController: UITableViewDataSource, UITableViewDelegate
 		cell?.createAtLabel.text = viewModel.createdAt
 		cell?.messageLabel.text = viewModel.message
 		return cell!
-	}
-
-	public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		releaseCellForReuse()
-	}
-
-	private func releaseCellForReuse() {
-		cell = nil
 	}
 }
