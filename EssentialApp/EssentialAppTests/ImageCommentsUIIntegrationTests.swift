@@ -10,7 +10,7 @@ import EssentialFeed
 import EssentialFeediOS
 
 class ImageCommentsUIIntegrationTests: XCTestCase {
-	func test_commetnsView_hasTitle() {
+	func test_commentsView_hasTitle() {
 		let (sut, _) = makeSUT()
 
 		sut.loadViewIfNeeded()
@@ -49,8 +49,8 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 	}
 
 	func test_loadCommentsCompletion_rendersSuccessfullyLoadedComments() {
-		let comment0 = makeComment(message: "massage1", username: "username1")
-		let comment1 = makeComment(message: "massage2", username: "username2")
+		let comment0 = makeComment(message: "message1", username: "username1")
+		let comment1 = makeComment(message: "message2", username: "username2")
 		let (sut, loader) = makeSUT()
 
 		sut.loadViewIfNeeded()
