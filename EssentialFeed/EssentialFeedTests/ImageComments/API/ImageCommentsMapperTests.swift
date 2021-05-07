@@ -74,7 +74,7 @@ class ImageCommentsMapperTests: XCTestCase {
 			"author": [
 				"username": username
 			]
-		].compactMapValues { $0 }
+		]
 
 		return (item, json)
 	}
