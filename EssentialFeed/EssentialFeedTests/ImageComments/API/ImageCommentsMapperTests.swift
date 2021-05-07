@@ -40,21 +40,24 @@ class ImageCommentsMapperTests: XCTestCase {
 		}
 	}
 
-	func test_map_deliversItemsOn200HTTPResponseWithJSONItems() throws {
+	func test_map_deliversItemsOn2XXHTTPResponseWithJSONItems() throws {
 		let item1 = makeItem(id: UUID(),
 		                     message: "message1",
 		                     createdAt: (Date(timeIntervalSince1970: 1598627222), "2020-08-28T15:07:02+00:00"),
 		                     username: "username1")
-
 		let item2 = makeItem(id: UUID(),
 		                     message: "message2",
 		                     createdAt: (Date(timeIntervalSince1970: 1577881882), "2020-01-01T12:31:22+00:00"),
 		                     username: "username2")
 		let json = makeItemsJSON([item1.json, item2.json])
+		let samples = [200, 299]
 
-		let result = try ImageCommentsMapper.map(json, from: HTTPURLResponse(statusCode: 200))
-
-		XCTAssertEqual(result, [item1.model, item2.model])
+		try samples.forEach { code in
+			XCTAssertEqual(
+				try ImageCommentsMapper.map(json, from: HTTPURLResponse(statusCode: code)),
+				[item1.model, item2.model]
+			)
+		}
 	}
 
 	// MARK: - Helpers
