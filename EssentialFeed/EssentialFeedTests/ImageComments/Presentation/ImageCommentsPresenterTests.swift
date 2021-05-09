@@ -18,6 +18,7 @@ class ImageCommentsPresenterTests: XCTestCase {
 			ImageComment(id: UUID(), message: "message1", createdAt: now.adding(minutes: -5), username: "username1"),
 			ImageComment(id: UUID(), message: "message2", createdAt: now.adding(days: -1), username: "username2")
 		]
+		
 		let viewModel = ImageCommentsPresenter.map(comments, currentDate: now, calendar: calendar, locale: locale)
 
 		XCTAssertEqual(viewModel.comments, [
